@@ -401,14 +401,21 @@
     repoScheduled = false;
     if (!overlay) return;
     var vw = window.innerWidth, vh = window.innerHeight;
-    detected.forEach(function (d) {
-      var r = d.el.getBoundingClientRect();
-      if (!r.width || !r.height || r.bottom < 0 || r.top > vh || r.right < 0 || r.left > vw) { d.box.style.display = "none"; return; }
-      var b = d.box.style;
+    var rects = detected.map(function (d) { return d.el.getBoundingClientRect(); }); // batch reads first
+    detected.forEach(function (d, i) {                                               // then batch writes
+      var r = rects[i], b = d.box.style;
+      if (!r.width || !r.height || r.bottom < 0 || r.top > vh || r.right < 0 || r.left > vw) { b.display = "none"; return; }
       b.display = "block"; b.left = r.left + "px"; b.top = r.top + "px"; b.width = r.width + "px"; b.height = r.height + "px";
     });
   }
   function scheduleReposition() { if (repoScheduled || !overlay) return; repoScheduled = true; requestAnimationFrame(reposition); }
+
+  // Continuous tracking while the overlay is on. The theme uses a smooth-scroll
+  // lib that transforms a wrapper instead of firing scroll events, so listening
+  // for "scroll" leaves boxes frozen. Repositioning every frame tracks reliably
+  // (also catches layout shifts from live tweaks). Cheap: one batched reflow/frame.
+  var rafId = null;
+  function tick() { reposition(); rafId = requestAnimationFrame(tick); }
 
   function showTip(d) {
     if (!tip) { tip = el("div"); tip.id = "sfa-tt-tip"; document.body.appendChild(tip); }
@@ -441,7 +448,8 @@
     overlayOn = !overlayOn;
     var btn = document.getElementById("sfa-tt-labels");
     if (btn) btn.classList.toggle("on", overlayOn);
-    if (overlayOn) { scan(); buildOverlay(); } else { teardownOverlay(); }
+    if (overlayOn) { scan(); buildOverlay(); rafId = requestAnimationFrame(tick); }
+    else { if (rafId) cancelAnimationFrame(rafId); rafId = null; teardownOverlay(); }
   }
 
   window.addEventListener("scroll", scheduleReposition, true);
