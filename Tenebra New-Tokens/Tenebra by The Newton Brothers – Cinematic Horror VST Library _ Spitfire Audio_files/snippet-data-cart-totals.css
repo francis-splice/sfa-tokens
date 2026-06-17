@@ -1,0 +1,26 @@
+.snippet-data-cart-totals dl {
+  display: grid;
+  grid-template-columns: 1fr -webkit-min-content;
+  grid-template-columns: 1fr min-content;
+  gap: 0.25rem 0.875rem;
+}
+.snippet-data-cart-totals dl:not(.total) {
+  font-size: 0.875rem;
+}
+.snippet-data-cart-totals dl:not(:last-of-type) {
+  margin-bottom: 0.75rem;
+}
+.snippet-data-cart-totals dd {
+  white-space: nowrap;
+  text-align: end;
+}
+.snippet-data-cart-totals small a {
+  font-weight: 500;
+  text-decoration: underline;
+  color: inherit;
+}
+.template-cart .snippet-data-cart-totals dl.total {
+  color: var(--colour-white);
+  font-size: 1.25rem;
+  font-weight: 600;
+}

@@ -1,0 +1,11 @@
+# OS / tooling
+.DS_Store
+.claude/
+.vercel
+.vercel/
+
+# Not needed by the published hub (Originals link to the live Spitfire site).
+# These stay on local disk; they are just not pushed / served.
+Proxima Nova/
+Tenebra Original/
+fonts/

@@ -1,0 +1,410 @@
+{
+  "font": {
+    "size": {
+      "neutral": {
+        "0": {
+          "value": "3.75rem",
+          "comment": "60px - H0 / Basic Medium"
+        },
+        "1": {
+          "value": "3rem",
+          "comment": "48px - H1 / Basic Medium"
+        },
+        "2": {
+          "value": "2.25rem",
+          "comment": "36px - H2 / Basic Medium"
+        },
+        "3": {
+          "value": "2rem",
+          "comment": "32px - H3 / Basic Medium"
+        },
+        "4": {
+          "value": "1.625rem",
+          "comment": "26px - H4 / Basic Medium"
+        },
+        "5": {
+          "value": "1.25rem",
+          "comment": "20px - H5 / Basic Medium"
+        },
+        "6": {
+          "value": "1rem",
+          "comment": "16px - H6 / Basic Medium"
+        },
+        "body-1": {
+          "value": "1rem",
+          "comment": "16px - Body 1 / Basic Regular"
+        },
+        "body-1-emphasis": {
+          "value": "1rem",
+          "comment": "16px - Body 1 Emphasis / Basic Medium"
+        },
+        "body-2": {
+          "value": "0.875rem",
+          "comment": "14px - Body 2 / Basic Regular"
+        },
+        "body-2-emphasis": {
+          "value": "0.875rem",
+          "comment": "14px - Body 2 Emphasis / Basic Medium"
+        },
+        "body-3": {
+          "value": "0.75rem",
+          "comment": "12px - Body 3 / Basic Regular"
+        },
+        "body-3-emphasis": {
+          "value": "0.75rem",
+          "comment": "12px - Body 3 Emphasis / Basic Medium"
+        }
+      },
+      "expressive": {
+        "0": {
+          "value": "3.75rem",
+          "comment": "60px - H0 / Light"
+        },
+        "1": {
+          "value": "3rem",
+          "comment": "48px - H1 / Light"
+        },
+        "2": {
+          "value": "2.25rem",
+          "comment": "36px - H2 / Light"
+        },
+        "3": {
+          "value": "2rem",
+          "comment": "32px - H3 / Light"
+        },
+        "4": {
+          "value": "1.625rem",
+          "comment": "26px - H4 / Light"
+        },
+        "5": {
+          "value": "1.25rem",
+          "comment": "20px - H5 / Light"
+        },
+        "6": {
+          "value": "1.125rem",
+          "comment": "18px - H6 / Light"
+        }
+      },
+      "cinematic": {
+        "1": {
+          "value": "2.6875rem",
+          "comment": "43px - H1 / Basic Bold / UPPERCASE"
+        },
+        "2": {
+          "value": "2rem",
+          "comment": "32px - H2 / Basic Bold / UPPERCASE"
+        },
+        "3": {
+          "value": "1.8125rem",
+          "comment": "29px - H3 / Basic Bold / UPPERCASE"
+        },
+        "4": {
+          "value": "1.4375rem",
+          "comment": "23px - H4 / Basic Bold / UPPERCASE"
+        },
+        "5": {
+          "value": "1.125rem",
+          "comment": "18px - H5 / Basic Bold / UPPERCASE"
+        },
+        "6": {
+          "value": "1rem",
+          "comment": "16px - H6 / Basic Bold / UPPERCASE"
+        },
+        "7": {
+          "value": "0.9375rem",
+          "comment": "15px - H7 / Basic Bold / UPPERCASE"
+        },
+        "control-label": {
+          "value": "0.75rem",
+          "comment": "12px - Control Label / Basic Medium / UPPERCASE"
+        }
+      }
+    }
+  },
+  "font-family": {
+    "neutral": {
+      "value": "'GT Flaire Trial VF', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+      "comment": "Neutral direction - GT Flaire Trial VF (trial font; swap for licensed before production)"
+    },
+    "expressive": {
+      "value": "'GT Ultra Fine Trial', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+      "comment": "Expressive direction - GT Ultra Fine Trial (trial font; swap for licensed before production)"
+    },
+    "cinematic": {
+      "value": "'GT Flaire Trial VF', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+      "comment": "Cinematic direction - GT Flaire Trial VF (trial font; swap for licensed before production)"
+    }
+  },
+  "font-weight": {
+    "neutral-regular": {
+      "value": "420",
+      "comment": "GT Flaire Basic Regular (VF instance)"
+    },
+    "neutral-medium": {
+      "value": "550",
+      "comment": "GT Flaire Basic Medium (VF instance)"
+    },
+    "expressive-light": {
+      "value": "300",
+      "comment": "GT Ultra Fine Light"
+    },
+    "cinematic-bold": {
+      "value": "700",
+      "comment": "GT Flaire Basic Bold"
+    },
+    "cinematic-medium": {
+      "value": "550",
+      "comment": "GT Flaire Basic Medium - Cinematic control label"
+    }
+  },
+  "line-height": {
+    "neutral": {
+      "0": {
+        "value": "1.0",
+        "comment": "60px on 60px"
+      },
+      "1": {
+        "value": "1.25",
+        "comment": "60px on 48px"
+      },
+      "2": {
+        "value": "1.22222",
+        "comment": "44px on 36px"
+      },
+      "3": {
+        "value": "1.25",
+        "comment": "40px on 32px"
+      },
+      "4": {
+        "value": "1.23077",
+        "comment": "32px on 26px"
+      },
+      "5": {
+        "value": "1.25",
+        "comment": "25px on 20px"
+      },
+      "6": {
+        "value": "1.25",
+        "comment": "20px on 16px"
+      },
+      "body-1": {
+        "value": "1.25",
+        "comment": "20px on 16px"
+      },
+      "body-1-emphasis": {
+        "value": "1.25",
+        "comment": "20px on 16px"
+      },
+      "body-2": {
+        "value": "1.28571",
+        "comment": "18px on 14px"
+      },
+      "body-2-emphasis": {
+        "value": "1.28571",
+        "comment": "18px on 14px"
+      },
+      "body-3": {
+        "value": "1.33333",
+        "comment": "16px on 12px"
+      },
+      "body-3-emphasis": {
+        "value": "1.33333",
+        "comment": "16px on 12px"
+      }
+    },
+    "expressive": {
+      "0": {
+        "value": "1.0",
+        "comment": "60px on 60px"
+      },
+      "1": {
+        "value": "1.08333",
+        "comment": "52px on 48px"
+      },
+      "2": {
+        "value": "1.11111",
+        "comment": "40px on 36px"
+      },
+      "3": {
+        "value": "1.125",
+        "comment": "36px on 32px"
+      },
+      "4": {
+        "value": "1.15385",
+        "comment": "30px on 26px"
+      },
+      "5": {
+        "value": "1.2",
+        "comment": "24px on 20px"
+      },
+      "6": {
+        "value": "1.22222",
+        "comment": "22px on 18px"
+      }
+    },
+    "cinematic": {
+      "1": {
+        "value": "1.06977",
+        "comment": "46px on 43px"
+      },
+      "2": {
+        "value": "1.09375",
+        "comment": "35px on 32px"
+      },
+      "3": {
+        "value": "1.10345",
+        "comment": "32px on 29px"
+      },
+      "4": {
+        "value": "1.13043",
+        "comment": "26px on 23px"
+      },
+      "5": {
+        "value": "1.16667",
+        "comment": "21px on 18px"
+      },
+      "6": {
+        "value": "1.1875",
+        "comment": "19px on 16px"
+      },
+      "7": {
+        "value": "1.13333",
+        "comment": "17px on 15px"
+      },
+      "control-label": {
+        "value": "1.16667",
+        "comment": "14px on 12px"
+      }
+    }
+  },
+  "letter-spacing": {
+    "neutral": {
+      "0": {
+        "value": "-0.025em",
+        "comment": "-2.5% of font size - H0"
+      },
+      "1": {
+        "value": "-0.02em",
+        "comment": "-2.0% of font size - H1"
+      },
+      "2": {
+        "value": "-0.02em",
+        "comment": "-2.0% of font size - H2"
+      },
+      "3": {
+        "value": "-0.015em",
+        "comment": "-1.5% of font size - H3"
+      },
+      "4": {
+        "value": "-0.015em",
+        "comment": "-1.5% of font size - H4"
+      },
+      "5": {
+        "value": "-0.005em",
+        "comment": "-0.5% of font size - H5"
+      },
+      "6": {
+        "value": "0em",
+        "comment": "0.0% of font size - H6"
+      },
+      "body-1": {
+        "value": "0em",
+        "comment": "0.0% of font size - Body 1"
+      },
+      "body-1-emphasis": {
+        "value": "0em",
+        "comment": "0.0% of font size - Body 1 Emphasis"
+      },
+      "body-2": {
+        "value": "0em",
+        "comment": "0.0% of font size - Body 2"
+      },
+      "body-2-emphasis": {
+        "value": "0em",
+        "comment": "0.0% of font size - Body 2 Emphasis"
+      },
+      "body-3": {
+        "value": "0em",
+        "comment": "0.0% of font size - Body 3"
+      },
+      "body-3-emphasis": {
+        "value": "0em",
+        "comment": "0.0% of font size - Body 3 Emphasis"
+      }
+    },
+    "expressive": {
+      "0": {
+        "value": "-0.01em",
+        "comment": "-1.0% of font size - H0"
+      },
+      "1": {
+        "value": "-0.01em",
+        "comment": "-1.0% of font size - H1"
+      },
+      "2": {
+        "value": "-0.01em",
+        "comment": "-1.0% of font size - H2"
+      },
+      "3": {
+        "value": "-0.01em",
+        "comment": "-1.0% of font size - H3"
+      },
+      "4": {
+        "value": "-0.005em",
+        "comment": "-0.5% of font size - H4"
+      },
+      "5": {
+        "value": "-0.005em",
+        "comment": "-0.5% of font size - H5"
+      },
+      "6": {
+        "value": "0em",
+        "comment": "0.0% of font size - H6"
+      }
+    },
+    "cinematic": {
+      "1": {
+        "value": "0.1em",
+        "comment": "10.0% of font size - H1"
+      },
+      "2": {
+        "value": "0.1em",
+        "comment": "10.0% of font size - H2"
+      },
+      "3": {
+        "value": "0.1em",
+        "comment": "10.0% of font size - H3"
+      },
+      "4": {
+        "value": "0.1em",
+        "comment": "10.0% of font size - H4"
+      },
+      "5": {
+        "value": "0.1em",
+        "comment": "10.0% of font size - H5"
+      },
+      "6": {
+        "value": "0.1em",
+        "comment": "10.0% of font size - H6"
+      },
+      "7": {
+        "value": "0.1em",
+        "comment": "10.0% of font size - H7"
+      },
+      "control-label": {
+        "value": "0.16em",
+        "comment": "16.0% of font size - Control Label"
+      }
+    }
+  },
+  "paragraph-spacing": {
+  "neutral": {
+    "body-1": { "value": "1rem", "comment": "16px - Body 1 paragraph spacing" },
+    "body-1-emphasis": { "value": "1rem", "comment": "16px - Body 1 Emphasis paragraph spacing" },
+    "body-2": { "value": "1rem", "comment": "16px - Body 2 paragraph spacing" },
+    "body-2-emphasis": { "value": "1rem", "comment": "16px - Body 2 Emphasis paragraph spacing" },
+    "body-3": { "value": "0.75rem", "comment": "12px - Body 3 paragraph spacing" },
+    "body-3-emphasis": { "value": "0.75rem", "comment": "12px - Body 3 Emphasis paragraph spacing" }
+  }
+}
+}

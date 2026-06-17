@@ -1,0 +1,14 @@
+.section-walkthrough-videos .grid {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 1.5rem;
+}
+@media (min-width: 992px) {
+  .section-walkthrough-videos .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .section-walkthrough-videos .grid .block-youtube-video:first-of-type {
+    grid-column: 1/span 2;
+  }
+}

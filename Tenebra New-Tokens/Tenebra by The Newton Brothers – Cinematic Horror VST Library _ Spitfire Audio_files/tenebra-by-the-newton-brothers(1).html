@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<!-- saved from url=(0196)https://www.spitfireaudio.com/web-pixels@032da393w19368061p0cc732e2m671615c3/custom/web-pixel-265027922@3/sandbox/modern/en-us/products/tenebra-by-the-newton-brothers?_pos=1&_psq=tene&_ss=e&_v=1.0 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Tenebra by The Newton Brothers – Cinematic Horror VST Library | Spitfire Audio</title>
+    <script src="./s032da393w19368061p0cc732e2m671615c3m.js"></script>
+
+    <script type="text/javascript">
+  (function(shopify) {shopify.extend('WebPixel::Render', function(api) {
+var analytics=api.analytics,browser=api.browser,init=api.init;
+// Added with Analyzify v4 - "29-10-2025 09:30"
+// VARIABLES
+const px_config = {
+    GA4: {
+        id: "G-5SB1WSTTNH",
+    },
+    flags: {
+        page_viewed: true,
+        product_viewed: false,
+        product_added_to_cart: "false" == "true" ? true : false,
+        product_removed_from_cart: "true" == "true" ? true : false,
+        cart_viewed: false,
+        checkout_started: "false" == "true" ? true : false,
+        accelerated_checkout_started: true,
+        payment_option: true,
+        input_changed: false,
+        ui_extension_errored: false,
+        alert_displayed: false,    
+        clicked: false,
+        checkout_contact_info_submitted: "true" == "true" ? true : false,
+        checkout_address_info_submitted: "true" == "true" ? true : false,
+        checkout_shipping_info_submitted: "true" == "true" ? true : false,
+        payment_info_submitted: "true" == "true" ? true : false,
+        checkout_completed: "false" == "true" ? true : false,
+    }
+};
+
+const consentModeEnabled = "true" == "true" ? true : false;
+/*
+consent_mode
+
+Options:
+  - true: Consent Mode enabled
+  - false: Consent Mode disabled
+*/
+
+const totalValue_option = null; // 'net', 'no_shipping', 'no_tax', null
+/*
+totalValue_option
+
+Options:
+  - net: without shipping and taxes; usage example: 'net'
+  - no_shipping: without shipping; usage example: 'no_shipping'
+  - no_tax: without taxes; usage example: 'no_tax'
+  - null: total price with shipping and taxes; usage example: null
+  Use quotes to set the value except for null as shown above.
+*/
+
+const add_to_cart_only_collections = "false" == "true" ? true : false
+const add_to_cart_only_pdp = "false" == "true" ? true : false
+const add_to_cart_only_home = "false" == "true" ? true : false
+const add_to_cart_only_pages = "false" == "true" ? true : false
+/*
+Configuration for "Add to Cart" event tracking:
+
+add_to_cart_only_pdp: 
+  - When true, tracks add to cart events on product detail pages (/products/*)
+  - Set to false to disable tracking on product pages
+  - by default it is true
+
+add_to_cart_only_collections:
+  - When true, tracks add to cart events on collection pages (/collections/*)
+  - Set to false to disable tracking on collection pages
+  - by default it is false
+
+add_to_cart_only_home:
+  - When true, tracks add to cart events on the homepage (/)
+  - Set to false to disable tracking on the homepage
+  - by default it is false
+
+add_to_cart_only_pages:
+  - When true, tracks add to cart events on the pages you specify
+  - Set to false to disable tracking on the pages you specify
+  - by default it is false
+
+These settings allow you to control where add to cart events are tracked.
+You can enable/disable tracking for specific page types independently.
+*/
+
+const user_data = 'email';
+
+const version = "1.4.12";
+
+const debug = {
+    status: true,
+    dlv: true,
+    detail: true,
+    callback: true,
+    color: "background:#1e9052;color:#fff;",
+    msg: "Analyzify GA4 Pixel ->"
+}
+
+const initData = init?.data || {};
+const initCart = initData?.cart || {};
+const initStore = initData?.shop?.myshopifyDomain || {};
+const initCurrency = initCart?.cost?.totalAmount?.currencyCode || null;
+
+if (debug.status && debug.detail) console.log('%c%s initData', debug.color, debug.msg, initData);
+
+const feed_region = null;
+const item_id_format = "shopify_item_id";
+/*
+item_id_format
+
+Options:
+  - variant_id
+  - product_id (default)
+  - product_sku
+  - null (shopify_XX_product_id_variant_id)
+*/
+
+const script = document.createElement("script");
+script.setAttribute("src", `https://www.googletagmanager.com/gtag/js?id=${px_config.GA4.id}`);
+script.setAttribute("async", "");
+document.head.appendChild(script);
+
+window.dataLayer = window.dataLayer || [];
+
+function gtag() {
+    dataLayer.push(arguments);
+}
+
+gtag("js", new Date());
+
+/*
+(async () => {
+  gtag('get', px_config.GA4.id, 'session_id', async (sid) => {
+    console.log('GA4: session_id', sid, 'an_ga4_gads', 'gtag');
+
+    // sessionStorage keys: azfy_sid_pr & azfy_sid_sc
+    const azfy_sid_pr = await browser.sessionStorage.getItem('azfy_sid_pr');
+    console.log('GA4: azfy_sid_pr', azfy_sid_pr);
+    gtag('set', { 'session_id': azfy_sid_pr });
+    
+  });
+})();
+*/
+
+// Check if consent mode is enabled
+if (consentModeEnabled) gtag_consent_mode(debug.status);
+
+gtag('config', px_config.GA4.id, { 'send_page_view': false });
+
+if (debug.status) console.log("%c%s Initialized", debug.color, debug.msg);
+
+async function gtag_consent_mode() {
+    try {
+        const consent_version = "2.0";
+        let initConsent = init?.customerPrivacy || {};
+
+        const consentSettings = {
+            ad_storage: initConsent?.marketingAllowed ? "granted" : "denied",
+            analytics_storage: initConsent?.analyticsProcessingAllowed ? "granted" : "denied",
+            ad_user_data: initConsent?.marketingAllowed ? "granted" : "denied",
+            ad_personalization: initConsent?.marketingAllowed ? "granted" : "denied",
+            analyzify_consent: initConsent?.analyticsProcessingAllowed && initConsent?.marketingAllowed ? "granted" : "denied",
+        };
+
+        if (debug?.status) {
+            console.log("%c%s Final Consent Settings", debug.color, debug.msg, consentSettings);
+        }
+
+        // Custom Event
+        window.dataLayer.push({
+            event: "consentUpdate",
+            status: 'default',
+            ...consentSettings
+        });
+
+        const consentObj = {
+            ...consentSettings,
+            wait_for_update: 500
+        };
+
+        // GTAG - Consent
+        gtag("consent", "default", consentObj);
+        if (debug.status) console.log(`%c%s Consent settings applied (v${consent_version})`, debug.color, debug.msg, consentObj);
+
+    } catch (error) {
+        console.error("%c%s Error fetching or parsing consent cookie:", debug.color, debug.msg, JSON.stringify(error));
+    }
+
+    if (debug.status) console.log('%c%s gtag_consent_mode is initiated!', debug.color, debug.msg);
+}
+
+async function hashValue(value) {
+  if (!value) return null;
+
+  // Check if crypto and subtle are available
+  if (typeof window === 'undefined' || !window.crypto || !window.crypto.subtle) {
+    console.error('Crypto API is not available in this browser. Unable to hash value.');
+    return null;
+  }
+
+  try {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(value);
+    const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  } catch (error) {
+    console.error('Error while hashing value:', error);
+    return null;
+  }
+}
+
+function parseQueryString(queryString){
+    try {
+      const query = {};
+    
+      if (!queryString || typeof queryString !== 'string') {
+        return query;
+      }
+    
+      // First decode the entire string to handle encoded characters
+      const decodedString = decodeURIComponent(queryString);
+      const pairs = (decodedString[0] === '?' ? decodedString.slice(1) : decodedString).split('&');
+  
+      for (const pair of pairs) {
+        if (!pair) continue;
+        const [key, ...values] = pair.split('=');
+        if (key) {
+          query[key] = values.join('=') || '';
+        }
+      }
+  
+      if(debug.status && debug.detail) console.log('%c%s query', debug.color, debug.msg, query);
+      return query;
+  
+    } catch (error) {
+      console.error('Error parsing query string:', error);
+      return {};
+    }
+}
+
+const urlReplaceWithParams = async function(decodedValue, eventData) {
+    try {
+      if (!eventData?.page_location) {
+        console.error('No page_location found');
+        return eventData?.page_location;
+      }
+  
+      if(debug.status) console.log('%c%s eventData:', debug.color, debug.msg, eventData);
+  
+      // Parse current URL parameters
+      const currentParams = parseQueryString(eventData?.query);
+      if(debug.status) console.log('%c%s currentParams:', debug.color, debug.msg, currentParams);
+  
+      // Parse cookie parameters from the already decoded value
+      const cookieParams = parseQueryString(decodedValue);
+      if(debug.status) console.log('%c%s cookieParams:', debug.color, debug.msg, cookieParams);
+  
+      // Create new URLSearchParams
+      const params = new URLSearchParams();
+  
+      // First add current URL parameters
+      for (const key in currentParams) {
+        if (currentParams.hasOwnProperty(key)) {
+          params.set(key, currentParams[key]);
+        }
+      }
+  
+      // Then add cookie parameters that don't exist in URL
+      for (const key in cookieParams) {
+        if (cookieParams.hasOwnProperty(key) && !currentParams[key]) {
+          params.set(key, cookieParams[key]);
+        }
+      }
+  
+      const searchParams = params.toString();
+      if (!searchParams) return eventData?.page_location;
+  
+      // Create new URL with the parameters
+      const baseUrl = eventData?.page_location.split('?')[0];
+      return `${baseUrl}?${searchParams}`;
+  
+    } catch (error) {
+      console.error('Error replacing URL with params:', error);
+      return eventData?.page_location;
+    }
+};
+
+const pageData = (event) => {
+    const { document } = event.context;
+    return {
+        page_title: document.title,
+        page_location: encodeURI(document.location.href),
+        cart_id: initCart?.id || null,
+    };
+}
+
+const getTotal = (valueObj, total, shipping, tax, subtotal) => {
+    try {
+        const totalValue = total || valueObj?.totalPrice?.amount || 0;
+        const shippingValue = shipping || valueObj?.shippingLine?.price?.amount || 0;
+        const taxValue = tax || valueObj?.totalTax?.amount || 0;
+        const subTotal = subtotal || valueObj?.subtotalPrice?.amount || 0;
+  
+        let finalValue = 0;
+  
+        switch (totalValue_option) {
+            case 'net':
+                finalValue = subTotal;
+                break;
+            case 'no_shipping':
+                finalValue = subTotal + taxValue;
+                break;
+            case 'no_tax':
+                finalValue = subTotal + shippingValue;
+                break;
+            default:
+                finalValue = totalValue;
+                break;
+        }
+  
+        return Number(parseFloat(finalValue).toFixed(2));
+    } catch (error) {
+        console.error('getTotal error:', error);
+        return 0; // Ensure a fallback return value
+    }
+}
+
+const getItemObj = (itemObj) => {
+    try {
+      if (!itemObj) {
+          console.error('Invalid itemObj:', itemObj);
+          return null;
+      }
+
+      const item = itemObj.variant || itemObj.merchandise || itemObj.productVariant;
+
+      let selected_id;
+      switch(item_id_format) {
+        case 'variant_id':
+          selected_id = item?.id;
+          break;
+        case 'product_id':
+          selected_id = item?.product?.id;
+          break;
+        case 'product_sku':
+          selected_id = item?.sku || item?.id || item?.product?.id;
+          break;
+        default:
+          selected_id = `shopify_${feed_region}_${item?.product?.id || ''}_${item?.id || ''}`;
+        }
+
+        const discountAll = itemObj?.discountAllocations?.reduce((total, discount) => total + (parseFloat(discount?.amount?.amount) || 0), 0) || 0;
+        const computedDiscount = itemObj?.finalLinePrice?.amount < item?.price?.amount ? item.price.amount - itemObj.finalLinePrice.amount : 0;
+        const getDiscount = Math.abs((discountAll || computedDiscount).toFixed(2));
+
+        const item_properties = itemObj?.properties || null;
+        if (debug.status && debug.detail) console.log('item_properties', item_properties);
+
+        return {
+            item_id: selected_id || null,
+            item_name: item?.product?.title?.trim() || item?.title?.trim() || null,
+            item_category: item?.product?.type || null,
+            item_brand: item?.product?.vendor?.trim() || null,
+            item_sku: item?.sku || null,
+            discount: getDiscount || 0,
+            item_variant: item?.title?.trim() || null,
+            item_variant_id: item?.id || null,
+            price: item?.price?.amount || 0,
+            quantity: item?.quantity || itemObj?.quantity || 1,
+            currency: item?.price?.currencyCode || itemObj?.finalLinePrice?.currencyCode || initCurrency,
+        };
+    } catch (error) {
+        console.error('getItemObj error:', error);
+    }
+}
+
+function doesPagePath(event, paths, scope = 'contain') {
+    const document = event.context.document;
+    const pagePath = document.location.pathname;
+  
+    return paths.some((path) => {
+      switch (scope) {
+        case 'start':
+          return pagePath.startsWith(path);
+        case 'equal':
+          return pagePath === path;
+        case 'does_not_contain':
+          return !pagePath.includes(path);
+        case 'contain':
+        default:
+          return pagePath.includes(path);
+      }
+    });
+}
+
+const getUserData = async (checkoutData, initData) => {
+    // Extract data from init
+    const initCustomer = initData?.customer || {};
+    const initEmail = initCustomer.email || initData?.email || null;
+    const initPhone = initCustomer.phone || initData?.phone || null;
+
+    // Extract data from checkoutData
+    const checkoutCustomer = checkoutData?.order?.customer || {};
+    const checkoutEmail = checkoutData?.email || checkoutCustomer?.email || null;
+    const checkoutPhone = checkoutData?.phone || checkoutCustomer?.phone || null;
+    const billingAddress = checkoutData?.billingAddress || {};
+    const shippingAddress = checkoutData?.shippingAddress || {};
+
+    // Determine the primary data source for user info
+    const email = checkoutEmail || initEmail || null;
+    const phone = checkoutPhone || initPhone || billingAddress?.phone || shippingAddress?.phone || null;
+    const customerId = checkoutCustomer?.id || initCustomer?.id || null;
+    const isFirstOrder = checkoutCustomer?.isFirstOrder || initCustomer?.isFirstOrder || null;
+    const firstName = billingAddress?.firstName || shippingAddress?.firstName || initCustomer?.firstName || null;
+    const lastName = billingAddress?.lastName || shippingAddress?.lastName || initCustomer?.lastName || null;
+    const street = `${billingAddress?.address1 || shippingAddress?.address1 || ''} ${billingAddress?.address2 || shippingAddress?.address2 || ''}`.trim();
+
+    // Hash email and phone
+    const customerId_hashed = await hashValue(customerId);
+    const email_hashed = await hashValue(email);
+    const phone_hashed = await hashValue(phone);
+    const firstName_hashed = await hashValue(firstName);
+    const lastName_hashed = await hashValue(lastName);
+    const street_hashed = await hashValue(street);
+
+    // Create the final user data object
+    const userData = user_data === 'email' ? {
+        cart_id: initCart?.id || null,
+        email_address: email,
+        sha256_email_address: email_hashed,
+    } : {
+        id: customerId,
+        user_id: customerId_hashed,
+        email_address: email,
+        sha256_email_address: email_hashed,
+        phone_number: phone,
+        sha256_phone_number: phone_hashed,
+        cart_id: initCart?.id || null,
+        address: {
+            first_name: firstName,
+            sha256_first_name: firstName_hashed,
+            last_name: lastName,
+            sha256_last_name: lastName_hashed,
+            street: street,
+            sha256_street: street_hashed,
+            city: billingAddress?.city || shippingAddress?.city || null,
+            country: billingAddress?.country || shippingAddress?.country || null,
+            region: billingAddress?.province || shippingAddress?.province || null,
+            postal_code: billingAddress?.zip || shippingAddress?.zip || null,
+        },
+        is_first_order: isFirstOrder ? true : false,
+        orders_count: initCustomer?.ordersCount || 0,
+        new_customer: initCustomer?.ordersCount === 0 || isFirstOrder ? true : false
+    };
+
+    if (debug.status && debug.detail) console.log('%c%s userData', debug.color, debug.msg, userData);
+
+    return userData;
+}
+
+const eventIDsQueue = [];
+function shouldTrigger(event) {
+  const now = new Date(event.timestamp).getTime();
+
+  // Find previous event with same name
+  const lastEvent = eventIDsQueue.find(e => e.name === event.name);
+
+  if (lastEvent) {
+    const previous = new Date(lastEvent.timestamp).getTime();
+    const diffSeconds = (now - previous) / 1000;
+
+    if (diffSeconds < 3) {
+      console.log(`${event.name} is already triggered!`);
+      return false; // too soon
+    }
+  }
+
+  // Add new event to the queue
+  eventIDsQueue.push({ name: event.name, timestamp: event.timestamp });
+
+  return true; // safe to trigger
+}
+
+const GTAG_Event = async (event, data) => {
+    try {
+
+        data.event_callback = () => {
+            if (debug.status) console.log(`%c%s ${event} event sent successfully`, debug.color, debug.msg);
+        };
+
+        const getMarketCookie = await browser.cookie.get('azfy_market');
+        const getShopCookie = await browser.cookie.get('azfy_shop');
+        const marketCookie = getMarketCookie ? JSON.parse(getMarketCookie) : null;
+        const shopCookie = getShopCookie ? JSON.parse(getShopCookie) : null;
+
+        // Send the GTAG event
+        gtag("event", event, {
+            ...data,
+            storefront_url: initData?.shop?.storefrontUrl || null,
+            cart_id: data?.cart_id || initCart?.id || null,
+            market_language: data?.market_language || marketCookie?.language?.includes('-') ? marketCookie?.language?.split('-')[0] : marketCookie?.language || null,
+            market_country: data?.market_country || marketCookie?.country?.toLowerCase() || null,
+            shop_locale: data?.shop_locale || shopCookie?.locale || null,
+            shop_country: initData?.shop?.countryCode?.toLowerCase() || shopCookie?.country?.toLowerCase() || null,
+            store_name: initStore.replace('https://','').replace('.myshopify.com','') || shopCookie?.name || null,
+            store_url: initStore.startsWith('https://') ? initStore : `https://${initStore}`,
+        });
+
+        if (debug.status) console.log(`%c%s ${event}`, debug.color, debug.msg, data);
+        if (debug.dlv) console.log("%c%s dataLayer", debug.color, debug.msg, window.dataLayer);
+    } catch (error) {
+        console.error('GTAG_Event error:', error);
+    }
+}
+
+if (debug.status) console.log(`%c%s Checkout Only Customer Events Pixel for ${px_config.GA4.id} initiated. Version: ${version}`, debug.color, debug.msg);
+
+const commonEventHandler = async (event, flag, eventName, getDataFn) => {
+    try {
+        if (px_config.flags[flag]) {
+            // Set user data
+            const user_data = await getUserData({}, initData);
+            gtag('set', 'user_data', user_data);
+            const data = getDataFn(event);
+            data.user_data = user_data;
+            GTAG_Event(eventName, data);
+        }
+    } catch (error) {
+        console.error('commonEventHandler error:', error);
+    }
+}
+
+function isEmptyObject(obj) {
+    return (
+        Object.keys(obj).length === 0 ||
+        Object.values(obj).every(
+            (value) => value === undefined || value === null || value === ""
+        )
+    );
+}
+
+function cleanObject(obj) {
+    return Object.fromEntries(
+        Object.entries(obj).filter(([_, value]) => value !== undefined && value !== null && value !== "")
+    );
+}
+
+// GENERAL EVENTS
+
+const checkoutEventHandler = async (event, eventName) => {
+    const checkoutData = event.data.checkout;
+
+    if(debug.status && debug.detail) console.log('%c%s checkoutData', debug.color, debug.msg, checkoutData);
+
+    const productData = checkoutData?.lineItems?.map((item) => {
+        const itemData = getItemObj(item);
+        return {
+            ...itemData,
+            quantity: item.quantity || 1,
+        };
+    }) || null;
+
+    // Set user data
+    const user_data = await getUserData(checkoutData, initData);
+    gtag('set', 'user_data', user_data);
+
+    const allDiscountCodes = checkoutData?.discountApplications
+    .filter(discount => discount.type === 'DISCOUNT_CODE' || discount.type === 'CODE')
+    .map(discount => discount.title) || null;
+
+    const shippingTiers = checkoutData?.delivery?.selectedDeliveryOptions
+    .filter(option => option.type === 'shipping')
+    .map(option => option.title) || null;
+
+    const lineItemPrice = Array.isArray(productData) ? productData.reduce((total, item) => {
+      const price = parseFloat(item?.price || 0);
+      const quantity = parseInt(item?.quantity || 1, 10);
+      return total + (price * quantity);
+    }, 0) : 0;
+    
+    const subTotal = checkoutData?.subtotalPrice?.amount;
+    const discount = checkoutData?.discountsAmount?.amount || checkoutData?.discountApplications[0]?.amount || 0;
+    const coupon = allDiscountCodes.length > 0 ? allDiscountCodes.join(', ') : checkoutData?.discountApplications[0]?.title || null;
+    const token = checkoutData?.token || null;
+    const localization = checkoutData?.localization || null;
+
+    let evObj = {
+        items: productData,
+        transaction_id: checkoutData?.order?.id || token || null,
+        payment_type: checkoutData?.transactions?.[0]?.gateway || null,
+        coupon: coupon,
+        discount: (coupon == null) ? 0 : (discount > 0) ? discount : lineItemPrice,
+        value: totalValue_option ? getTotal(checkoutData) : checkoutData?.totalPrice?.amount || 0,
+        token: token,
+        cart_id: initCart?.id || null,
+        currency: checkoutData?.currencyCode || checkoutData?.totalPrice?.currencyCode || initCurrency || null,
+        shipping: checkoutData?.shippingLine?.price?.amount || 0,
+        shipping_tier: Array.isArray(shippingTiers) ? shippingTiers.join(', ') : shippingTiers || null,
+        tax: checkoutData?.totalTax?.amount || 0,
+        subtotal: checkoutData?.subtotalPrice?.amount || 0,
+        user_data: user_data || null,
+        market_language: localization?.language?.isoCode?.toLowerCase() || null,
+        market_country: localization?.country?.isoCode?.toLowerCase() || null,
+        ...pageData(event)
+    };
+
+    evObj = cleanObject(evObj); // Clean the object to remove undefined, null, or empty values
+
+    if (!isEmptyObject(evObj)) {
+        GTAG_Event(eventName, evObj);
+    }
+};
+
+const logEventDebug = (eventName) => {
+    if (debug.status) {
+        console.log(`%c%s all_events -> ${eventName}`, debug.color, debug.msg);
+    }
+}
+
+// Handle all standard events
+analytics.subscribe("all_events", async (event) => {
+    try {
+        const eventHandlers = {
+            page_viewed: () => {
+                if (px_config.flags.page_viewed){
+                    // Check if the page is a checkout page
+                    if (doesPagePath(event, ['/checkouts', '/orders'], 'contain')) {
+                        commonEventHandler(event, 'page_viewed', 'page_view', (e) => pageData(e));
+                    }
+                }
+            },
+            product_viewed: () => {
+                if (px_config.flags.product_viewed) {
+                    const productData = getItemObj(event.data);
+                    commonEventHandler(event, 'product_viewed', 'view_item', (e) => ({
+                        items: [productData],
+                        value: e.data.productVariant.price.amount,
+                        currency: e.data.productVariant.price.currencyCode || initCurrency,
+                        ...pageData(e)
+                    }));
+                }
+            },
+            product_added_to_cart: () => {
+                if (px_config.flags.product_added_to_cart && shouldTrigger(event)) {
+                    const cartData = event.data.cartLine;
+                    const productData = getItemObj(cartData);
+                    const GTAG_A2C = () => {
+                        commonEventHandler(event, 'product_added_to_cart', 'add_to_cart', (e) => ({
+                            items: [productData],
+                            value: Number(parseFloat(cartData?.cost?.totalAmount?.amount).toFixed(2)),
+                            currency: cartData?.cost?.totalAmount?.currencyCode || initCurrency,
+                            ...pageData(e)
+                        }));
+                    };
+
+                    // only product detail pages
+                    if(
+                        add_to_cart_only_pdp &&
+                        (
+                          doesPagePath(event, ['/products'], 'contain') &&
+                          doesPagePath(event, ['/collections'], 'does_not_contain')
+                        ) ||
+                        (
+                          doesPagePath(event, ['/collections'], 'contain') &&
+                          doesPagePath(event, ['/products'], 'contain')
+                        )
+                      ){
+                        GTAG_A2C();
+                    }
+                
+                    // only collection pages
+                    if(
+                        add_to_cart_only_collections &&
+                        doesPagePath(event, ['/collections'], 'contain') &&
+                        doesPagePath(event, ['/products'], 'does_not_contain')
+                    ){
+                        GTAG_A2C();
+                    }
+                    
+                    // only for homepage
+                    if (
+                        add_to_cart_only_home &&
+                        doesPagePath(event, ["/"], 'equal')
+                    ) {
+                        GTAG_A2C();
+                    }
+
+                    // only for pages
+                    if (
+                        add_to_cart_only_pages &&
+                        doesPagePath(event, ["/pages"], 'contain')
+                    ) {
+                        GTAG_A2C();
+                    }
+
+                }
+            },
+            product_removed_from_cart: () => {
+                if (px_config.flags.product_added_to_cart && shouldTrigger(event)) {
+                    const cartData = event.data.cartLine;
+                    const productData = getItemObj(cartData);
+                    commonEventHandler(event, 'product_removed_from_cart', 'remove_from_cart', (e) => ({
+                      items: [productData],
+                      value: Number(parseFloat(cartData?.cost?.totalAmount?.amount).toFixed(2)),
+                      currency: cartData?.cost?.totalAmount?.currencyCode || initCurrency,
+                      ...pageData(e)
+                    }));
+                }
+            },
+            cart_viewed: async () => {
+                if (px_config.flags.cart_viewed) {
+                    const cartData = event.data?.cart;
+                    const productData = cartData?.lines.map((item) => {
+                        return getItemObj(item);
+                    });
+                    commonEventHandler(event, 'cart_viewed', 'view_cart', (e) => ({
+                        items: productData,
+                        value: Number(parseFloat(cartData?.cost?.totalAmount?.amount).toFixed(2)),
+                        currency: cartData?.cost?.totalAmount?.currencyCode || initCurrency,
+                        cart_id: event.data?.cart?.id,
+                        ...pageData(e)
+                    }));
+                }
+            },
+            checkout_started: async () => {
+                if (px_config.flags.checkout_started) {
+                    await checkoutEventHandler(event, 'begin_checkout');
+                }
+            },
+            accelerated_checkout_started: () => {
+                if (px_config.flags.accelerated_checkout_started) {
+                    GTAG_Event('accelerated_checkout', {
+                      payment_method: event.data?.acceleratedCheckout?.name || null,
+                      ...pageData(event)
+                    });
+                }
+            },
+            checkout_contact_info_submitted: async () => {
+                if (px_config.flags.checkout_contact_info_submitted) {
+                    await checkoutEventHandler(event, 'add_contact_info');
+                }
+            },
+            checkout_address_info_submitted: async () => {
+                if (px_config.flags.checkout_address_info_submitted) {
+                    await checkoutEventHandler(event, 'add_address_info');
+                }
+            },
+            checkout_shipping_info_submitted: async () => {
+                if (px_config.flags.checkout_shipping_info_submitted) {
+                    await checkoutEventHandler(event, 'add_shipping_info');
+                }
+            },
+            payment_info_submitted: async () => {
+                if (px_config.flags.payment_info_submitted && !oneTimeEventHandlers.payment_info_submitted) {
+                    oneTimeEventHandlers.payment_info_submitted = true;
+                    await checkoutEventHandler(event, 'add_payment_info');
+                }
+            },
+            checkout_completed: async () => {
+                if (px_config.flags.checkout_completed && !oneTimeEventHandlers.checkout_completed) {
+                    oneTimeEventHandlers.checkout_completed = true;
+                    await checkoutEventHandler(event, 'purchase');
+                }
+            },
+            clicked: () => {
+                if(event.data.element.id === "payment_basic") {
+                  GTAG_Event('payment_option', {
+                    option_id: event.data?.element?.id || null,
+                    option_value: event.data?.element?.value || null,
+                    ...pageData(event)
+                  });
+                }
+            },
+            input_changed: () => {
+                if(
+                    event.data.element.id === "summary_reductions" &&
+                    event.data.element.value !== ''
+                ) {
+                  GTAG_Event('coupon_defined', {
+                    option_id: event.data?.element?.id || null,
+                    option_value: event.data?.element?.value || null,
+                    ...pageData(event)
+                  });
+                }
+            },
+            ui_extension_errored: () => {
+                GTAG_Event('ui_extension_errored', {
+                    error_message: event.data?.error?.message || null,
+                    error_trace: event.data?.error?.trace || null,
+                    error_type: event.data?.error?.type || null,
+                    ...pageData(event)
+                });
+            },
+            alert_displayed: () => {
+                GTAG_Event('alert_displayed', {
+                    alert_message: event.data?.alert?.message || null,
+                    alert_type: event.data?.alert?.type || null,
+                    alert_value: event.data?.alert?.value || null,
+                    ...pageData(event)
+                });
+            }
+        };
+
+        if (eventHandlers[event.name]) {
+            eventHandlers[event.name]();
+            logEventDebug(event.name);
+        }
+    } catch (error) {
+        console.error('all_events error:', error);
+    }
+});
+
+const oneTimeEventHandlers = {
+    payment_info_submitted: false,
+    checkout_completed: false,
+}
+
+});})(self.webPixelsManager.createShopifyExtend('265027922', 'custom'));
+
+</script>
+
+  <script src="./js(1)" async=""></script></head>
+  <body data-new-gr-c-s-check-loaded="14.1303.0" data-gr-ext-installed="">
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true" style="visibility: visible !important;"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

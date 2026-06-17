@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<!-- saved from url=(0197)https://www.spitfireaudio.com/web-pixels@032da393w19368061p0cc732e2m671615c3/custom/web-pixel-251330898@12/sandbox/modern/en-us/products/tenebra-by-the-newton-brothers?_pos=1&_psq=tene&_ss=e&_v=1.0 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Tenebra by The Newton Brothers – Cinematic Horror VST Library | Spitfire Audio</title>
+    <script async="" src="./events.js"></script><script type="text/javascript" async="" src="./js"></script><script type="text/javascript" async="" src="./destination"></script><script type="text/javascript" async="" src="./pixel.js"></script><script async="" src="./gtm.js"></script><script src="./s032da393w19368061p0cc732e2m671615c3m.js"></script>
+
+    <script type="text/javascript">
+  (function(shopify) {shopify.extend('WebPixel::Render', function(api) {
+var analytics=api.analytics,browser=api.browser,init=api.init;
+
+// Step 1. Initialize the JavaScript pixel SDK (make sure to exclude HTML)
+
+
+// Step 2. Subscribe to customer events with analytics.subscribe(), and add tracking
+//  analytics.subscribe("all_standard_events", function (event) {
+//    console.log("Event data ", event?.data);
+//  });
+
+// ---- Load GTM in the pixel sandbox ----
+(function (w,d,s,l,i) {
+  w[l] = w[l] || [];
+  w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;
+  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+  f.parentNode.insertBefore(j,f);
+})(window, document, 'script', 'dataLayer', 'GTM-WZK36XK6'); // <-- your GTM ID
+
+window.dataLayer = window.dataLayer || [];
+// Minimal GTM bridge + standard + custom enrich
+window.dataLayer = window.dataLayer || [];
+
+// 1) (Optional) Also listen to Shopify's standard product_viewed
+//    to forward baseline info. This does NOT include barcode.
+analytics.subscribe('product_viewed', (event) => {
+  const pv = event.data?.productVariant;
+  const prod = event.data?.product;
+
+  window.dataLayer.push({
+    event: 'product_viewed',
+    ecommerce: {
+      currency: pv?.price?.currencyCode || undefined,
+      value: typeof pv?.price?.amount === 'number' ? pv.price.amount : undefined,
+      items: [{
+        item_id: pv?.id,
+        item_name: prod?.title,
+        item_brand: prod?.vendor,
+        item_category: prod?.type,
+        item_variant: pv?.title,
+        sku: pv?.sku,
+        price: pv?.price?.amount
+        // barcode will be added by our custom event below
+      }]
+    }
+  });
+});
+
+// 2) Listen to the custom event published from Liquid with the barcode
+analytics.subscribe('herd:product_viewed_with_barcode', (event) => {
+  const d = event.customData || {};
+  // Option A: push a separate, lightweight update with barcode only
+  //window.dataLayer.push({
+  //  event: 'product_viewed_barcode',
+  //  barcode: d.barcode || null,
+  //  gtin: d.barcode || null,   // convenient alias
+  //  variant_id: d.variant_id || null
+  //});
+
+  window.dataLayer.push({
+    event: 'product_viewed_barcode',
+    ecommerce: {
+      currency: d.currency,
+      value: d.price,
+      items: [{
+        item_id: String(d.variant_id || d.product_id),
+        item_name: d.product_title,
+        item_brand: d.vendor,
+        item_category: d.type,
+        item_variant: d.variant_title,
+        sku: d.sku,
+        price: d.price,
+        barcode: d.barcode,
+        gtin: d.barcode
+      }]
+    }
+  });
+});
+
+
+// GA4 + barcode enrichment from a Shopify Custom Pixel
+
+// --- Utilities ---
+const STORAGE_KEY = 'herd_variant_barcode_map';
+
+// Async storage helpers (execute in top frame via Shopify Web Pixels API)
+async function loadMapFromStorage() {
+  try {
+    const raw = await browser.sessionStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) { return {}; }
+}
+async function saveMapToStorage(map) {
+  try { await browser.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(map || {})); }
+  catch (e) {}
+}
+function mergeMaps(a, b) {
+  return Object.assign({}, a || {}, b || {});
+}
+function toStr(x) { return (x == null) ? '' : String(x); }
+
+// Ensure dataLayer exists in the pixel sandbox
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); } // If you use GTM, this is fine; otherwise you can push objects directly.
+
+// --- State ---
+let variantMap = {};
+let mapLoaded = false;
+
+(async () => {
+  variantMap = await loadMapFromStorage();
+  mapLoaded = true;
+})();
+
+// --- Ingest variant maps from theme/cart via custom event ---
+analytics.subscribe('herd:variant_map', async (event) => {
+  const incoming = (event?.customData && event.customData.map) || {};
+  if (incoming && typeof incoming === 'object') {
+    variantMap = mergeMaps(variantMap, incoming);
+    await saveMapToStorage(variantMap);
+  }
+});
+
+// --- Helper: enrich Shopify line items with barcode (fallback to SKU) ---
+function enrichLineItems(lineItems = []) {
+  return lineItems.map((li) => {
+    const vid = toStr(li?.variant?.id || li?.variantId || li?.id);
+    const mapHit = variantMap[vid] || {};
+    const barcode = mapHit.barcode || li?.variant?.barcode || null;
+    const sku = li?.variant?.sku || mapHit.sku || null;
+
+    // Build GA4 item
+    // Note: GA4 supports custom item params. We'll send "item_gtin" if available.
+    // You can register "item_gtin" as a custom dimension in GA4.
+    return {
+      item_id: toStr(li?.variant?.id || li?.product?.id || li?.id),
+      item_name: toStr(li?.title || li?.variant?.title || li?.product?.title),
+      item_variant: toStr(li?.variant?.title),
+      quantity: Number(li?.quantity || 1),
+      price: Number(li?.price?.amount || li?.price || 0),
+      sku: toStr(sku),                 // optional, helpful in GA4
+      item_gtin: toStr(barcode || sku) // fallback to SKU if barcode missing
+    };
+  });
+}
+
+// --- BEGIN CHECKOUT (GA4: begin_checkout) ---
+analytics.subscribe('checkout_started', async (event) => {
+  // Make sure we have the latest persisted map
+  if (!mapLoaded) {
+    variantMap = await loadMapFromStorage();
+    mapLoaded = true;
+  }
+
+  // Shopify checkout payload shape (lineItems, totals, etc.) is available on event.data.checkout
+  // per the Web Pixels standard event docs.
+  const checkout = event?.data?.checkout;
+  const items = enrichLineItems(checkout?.lineItems || []);
+
+  window.dataLayer.push({
+    event: 'begin_checkout',
+    ecommerce: {
+      currency: checkout?.currencyCode,
+      value: Number(checkout?.totalPrice?.amount || 0),
+      items
+    },
+    // For debugging/attribution:
+    _pixel_event_id: event?.id,
+    _client_id: event?.clientId
+  });
+});
+/* Docs for checkout_started including shape/snippets:
+   https://shopify.dev/docs/api/web-pixels-api/standard-events/checkout_started
+*/
+// --- PURCHASE (GA4: purchase) ---
+analytics.subscribe('checkout_completed', async (event) => {
+  // Ensure map is available even on the thank-you page
+  if (!mapLoaded) {
+    variantMap = await loadMapFromStorage();
+    mapLoaded = true;
+  }
+
+  const checkout = event?.data?.checkout;
+  const items = enrichLineItems(checkout?.lineItems || []);
+
+  // GA4 recommended purchase params
+  window.dataLayer.push({
+    event: 'purchase',
+    ecommerce: {
+      transaction_id: toStr(checkout?.order?.id || checkout?.token || event?.id),
+      affiliation: 'Online Store',
+      value: Number(checkout?.totalPrice?.amount || 0),
+      tax: Number(checkout?.totalTax?.amount || 0),
+      shipping: Number(checkout?.shippingLine?.price?.amount || 0),
+      currency: checkout?.currencyCode,
+      coupon: (checkout?.discountApplications || [])
+                  .filter(d => d?.type === 'DISCOUNT_CODE')
+                  .map(d => d?.title)
+                  .join(',') || undefined,
+      items
+    },
+    _pixel_event_id: event?.id,
+    _client_id: event?.clientId
+  });
+});
+
+});})(self.webPixelsManager.createShopifyExtend('251330898', 'custom'));
+
+</script>
+
+  <link id="sa-css" rel="stylesheet" type="text/css" href="./sa.css" media="all"></head>
+  <body data-new-gr-c-s-check-loaded="14.1303.0" data-gr-ext-installed="">
+
+<script type="text/javascript" id="" charset="">!function(b,e,f,g,a,c,d){b.saq||(a=b.saq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._saq||(b._saq=a),a.push=a,a.loaded=!0,a.version="1.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://tags.srv.stackadapt.com/events.js");saq("ts","3pMM5YG8Lo4oS2_pr9T9Ag");</script></body><grammarly-desktop-integration data-grammarly-shadow-root="true" style="visibility: visible !important;"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

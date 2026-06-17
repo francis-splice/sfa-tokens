@@ -1,0 +1,27 @@
+.block-social-links {
+  text-align: var(--text-alignment, start);
+}
+.block-social-links .block-text {
+  margin-bottom: 1rem;
+}
+.block-social-links .block-text * {
+  max-width: none;
+}
+.block-social-links > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: var(--justify-content, flex-start);
+}
+.block-social-links > ul a {
+  color: var(--colour-white);
+  text-decoration: none;
+}
+.block-social-links > ul a svg {
+  fill: currentColor;
+  height: 1.75rem;
+  width: 1.75rem;
+}

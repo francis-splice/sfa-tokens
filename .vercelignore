@@ -1,0 +1,9 @@
+# The hub (index.html) only serves itself, the two Tokens folders, and the
+# footer .md files. Originals link to the live Spitfire site, so the local
+# replica and source assets don't need deploying.
+.DS_Store
+.claude/
+Proxima Nova/
+Tenebra Original/
+tokens/
+fonts/

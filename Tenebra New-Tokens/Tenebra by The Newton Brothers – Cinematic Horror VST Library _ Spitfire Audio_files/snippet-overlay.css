@@ -1,0 +1,30 @@
+.snippet-overlay {
+  background-color: var(--colour-black);
+  position: fixed;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-duration) var(--transition-timing) 0s;
+  transition-delay: var(--transition-duration);
+}
+.snippet-overlay.js-is-visible, .snippet-overlay[data-is-open=true] {
+  opacity: 0.64;
+  visibility: visible;
+  transition-delay: 0s;
+}
+#wrapper:has(.tier-one-navigation > li:hover) .snippet-overlay[data-theme-menu-overlay] {
+  opacity: 0.64;
+  visibility: visible;
+  transition-delay: 0s;
+}
+@media (min-width: 1280px) {
+  .snippet-overlay[data-theme-menu-overlay] {
+    top: var(--top-offset);
+    height: calc(100% - var(--top-offset));
+    transition-delay: 0.1s;
+    pointer-events: none;
+  }
+}

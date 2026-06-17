@@ -1,0 +1,25 @@
+.block-newsletter .block-text {
+  margin-bottom: 1rem;
+}
+.block-newsletter .block-text * {
+  max-width: none;
+}
+.block-newsletter .form-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  max-width: 24rem;
+}
+.block-newsletter .form-wrapper input, .block-newsletter .form-wrapper button {
+  height: 2.25rem;
+}
+.block-newsletter .form-wrapper button {
+  white-space: nowrap;
+}
+.block-newsletter .form-wrapper input {
+  max-width: none;
+}
+.block-newsletter > p {
+  margin: 0;
+}

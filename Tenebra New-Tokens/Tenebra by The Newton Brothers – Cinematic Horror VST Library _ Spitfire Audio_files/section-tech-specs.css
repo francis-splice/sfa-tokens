@@ -1,0 +1,21 @@
+.section-tech-specs .content {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 2.5rem;
+}
+.section-tech-specs:has(.changelogs) .content {
+  margin-bottom: 1.5rem;
+}
+.section-tech-specs .changelogs .heading {
+  margin-bottom: 0.5rem;
+}
+@media (min-width: 768px) {
+  .section-tech-specs .content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1280px) {
+  .section-tech-specs .content {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

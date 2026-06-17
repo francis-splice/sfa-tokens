@@ -1,0 +1,457 @@
+/* =================================================================
+   NEW-TOKENS  —  generated 1:1 from tokens/typography-tokens.json
+   and the rules in tokens/typography.md. Do not hand-edit values that
+   should live in the JSON; regenerate instead.
+
+   Linked LAST in <head> so its :root wins the cascade over the theme.
+   ----------------------------------------------------------------
+   Directions (typography.md):
+     Neutral    = GT Flaire Trial VF, Medium 550 (headings) / Regular 420 (body)  -> body, UI, nav, prices, most headings
+     Expressive = GT Ultra Fine Trial, Light 300                                   -> narrative / story headings only
+     Cinematic  = GT Flaire Trial VF, Bold 700, UPPERCASE, 10% tracking            -> short functional labels only
+   ================================================================= */
+
+/* ---- Self-hosted fonts (files sit next to this CSS) ---- */
+@font-face {
+  font-family: "GT Flaire Trial VF";
+  src: url("GT-Flaire-Trial-VF.woff2") format("woff2-variations");
+  font-weight: 420 700;            /* VF instances: Regular 420, Medium 550, Bold 700 */
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GT Ultra Fine Trial";
+  src: url("GT-Ultra-Fine-Light-Trial.woff2") format("woff2");
+  font-weight: 300;                /* Light */
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "GT Ultra Fine Trial";
+  src: url("GT-Ultra-Fine-Regular-Trial.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* font-family (from JSON font-family.*) */
+  --font-family-neutral: 'GT Flaire Trial VF', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  --font-family-expressive: 'GT Ultra Fine Trial', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  --font-family-cinematic: 'GT Flaire Trial VF', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+
+  /* font-weight (from JSON font-weight.*) */
+  --font-weight-neutral-regular: 420;
+  --font-weight-neutral-medium: 550;
+  --font-weight-expressive-light: 300;
+  --font-weight-cinematic-bold: 700;
+  --font-weight-cinematic-medium: 550;
+
+  /* font-size (from JSON font.size.<direction>.<level>) */
+  --font-size-neutral-0: 3.75rem;  /* 60px - H0 / Basic Medium */
+  --font-size-neutral-1: 3rem;  /* 48px - H1 / Basic Medium */
+  --font-size-neutral-2: 2.25rem;  /* 36px - H2 / Basic Medium */
+  --font-size-neutral-3: 2rem;  /* 32px - H3 / Basic Medium */
+  --font-size-neutral-4: 1.625rem;  /* 26px - H4 / Basic Medium */
+  --font-size-neutral-5: 1.25rem;  /* 20px - H5 / Basic Medium */
+  --font-size-neutral-6: 1rem;  /* 16px - H6 / Basic Medium */
+  --font-size-neutral-body-1: 1rem;  /* 16px - Body 1 / Basic Regular */
+  --font-size-neutral-body-1-emphasis: 1rem;  /* 16px - Body 1 Emphasis / Basic Medium */
+  --font-size-neutral-body-2: 0.875rem;  /* 14px - Body 2 / Basic Regular */
+  --font-size-neutral-body-2-emphasis: 0.875rem;  /* 14px - Body 2 Emphasis / Basic Medium */
+  --font-size-neutral-body-3: 0.75rem;  /* 12px - Body 3 / Basic Regular */
+  --font-size-neutral-body-3-emphasis: 0.75rem;  /* 12px - Body 3 Emphasis / Basic Medium */
+  --font-size-expressive-0: 3.75rem;  /* 60px - H0 / Light */
+  --font-size-expressive-1: 3rem;  /* 48px - H1 / Light */
+  --font-size-expressive-2: 2.25rem;  /* 36px - H2 / Light */
+  --font-size-expressive-3: 2rem;  /* 32px - H3 / Light */
+  --font-size-expressive-4: 1.625rem;  /* 26px - H4 / Light */
+  --font-size-expressive-5: 1.25rem;  /* 20px - H5 / Light */
+  --font-size-expressive-6: 1.125rem;  /* 18px - H6 / Light */
+  --font-size-cinematic-1: 2.6875rem;  /* 43px - H1 / Basic Bold / UPPERCASE */
+  --font-size-cinematic-2: 2rem;  /* 32px - H2 / Basic Bold / UPPERCASE */
+  --font-size-cinematic-3: 1.8125rem;  /* 29px - H3 / Basic Bold / UPPERCASE */
+  --font-size-cinematic-4: 1.4375rem;  /* 23px - H4 / Basic Bold / UPPERCASE */
+  --font-size-cinematic-5: 1.125rem;  /* 18px - H5 / Basic Bold / UPPERCASE */
+  --font-size-cinematic-6: 1rem;  /* 16px - H6 / Basic Bold / UPPERCASE */
+  --font-size-cinematic-7: 0.9375rem;  /* 15px - H7 / Basic Bold / UPPERCASE */
+  --font-size-cinematic-control-label: 0.75rem;  /* 12px - Control Label / Basic Medium / UPPERCASE */
+
+  /* line-height (unitless ratios) */
+  --line-height-neutral-0: 1.0;
+  --line-height-neutral-1: 1.25;
+  --line-height-neutral-2: 1.22222;
+  --line-height-neutral-3: 1.25;
+  --line-height-neutral-4: 1.23077;
+  --line-height-neutral-5: 1.25;
+  --line-height-neutral-6: 1.25;
+  --line-height-neutral-body-1: 1.25;
+  --line-height-neutral-body-1-emphasis: 1.25;
+  --line-height-neutral-body-2: 1.28571;
+  --line-height-neutral-body-2-emphasis: 1.28571;
+  --line-height-neutral-body-3: 1.33333;
+  --line-height-neutral-body-3-emphasis: 1.33333;
+  --line-height-expressive-0: 1.0;
+  --line-height-expressive-1: 1.08333;
+  --line-height-expressive-2: 1.11111;
+  --line-height-expressive-3: 1.125;
+  --line-height-expressive-4: 1.15385;
+  --line-height-expressive-5: 1.2;
+  --line-height-expressive-6: 1.22222;
+  --line-height-cinematic-1: 1.06977;
+  --line-height-cinematic-2: 1.09375;
+  --line-height-cinematic-3: 1.10345;
+  --line-height-cinematic-4: 1.13043;
+  --line-height-cinematic-5: 1.16667;
+  --line-height-cinematic-6: 1.1875;
+  --line-height-cinematic-7: 1.13333;
+  --line-height-cinematic-control-label: 1.16667;
+
+  /* letter-spacing (em) */
+  --letter-spacing-neutral-0: -0.025em;
+  --letter-spacing-neutral-1: -0.02em;
+  --letter-spacing-neutral-2: -0.02em;
+  --letter-spacing-neutral-3: -0.015em;
+  --letter-spacing-neutral-4: -0.015em;
+  --letter-spacing-neutral-5: -0.005em;
+  --letter-spacing-neutral-6: 0em;
+  --letter-spacing-neutral-body-1: 0em;
+  --letter-spacing-neutral-body-1-emphasis: 0em;
+  --letter-spacing-neutral-body-2: 0em;
+  --letter-spacing-neutral-body-2-emphasis: 0em;
+  --letter-spacing-neutral-body-3: 0em;
+  --letter-spacing-neutral-body-3-emphasis: 0em;
+  --letter-spacing-expressive-0: -0.01em;
+  --letter-spacing-expressive-1: -0.01em;
+  --letter-spacing-expressive-2: -0.01em;
+  --letter-spacing-expressive-3: -0.01em;
+  --letter-spacing-expressive-4: -0.005em;
+  --letter-spacing-expressive-5: -0.005em;
+  --letter-spacing-expressive-6: 0em;
+  --letter-spacing-cinematic-1: 0.1em;
+  --letter-spacing-cinematic-2: 0.1em;
+  --letter-spacing-cinematic-3: 0.1em;
+  --letter-spacing-cinematic-4: 0.1em;
+  --letter-spacing-cinematic-5: 0.1em;
+  --letter-spacing-cinematic-6: 0.1em;
+  --letter-spacing-cinematic-7: 0.1em;
+  --letter-spacing-cinematic-control-label: 0.16em;
+
+  /* paragraph-spacing (rem; applied as margin-block-end on body styles) */
+  --paragraph-spacing-neutral-body-1: 1rem;
+  --paragraph-spacing-neutral-body-1-emphasis: 1rem;
+  --paragraph-spacing-neutral-body-2: 1rem;
+  --paragraph-spacing-neutral-body-2-emphasis: 1rem;
+  --paragraph-spacing-neutral-body-3: 0.75rem;
+  --paragraph-spacing-neutral-body-3-emphasis: 0.75rem;
+
+  /* ---- Map onto the theme's consumed vars (typography.md role rules) ---- */
+  --font-family-base:        var(--font-family-neutral);     /* body / UI / nav = Neutral (GT Flaire) */
+  --font-family-heading:     var(--font-family-neutral);     /* default heading = Neutral; Expressive/Cinematic applied per-section */
+  --font-family-heading-alt: var(--font-family-expressive);  /* narrative display = Expressive (GT Ultra Fine) */
+  --font-size-base:          var(--font-size-neutral-body-1);
+  --font-weight-base:        var(--font-weight-neutral-regular);
+
+  /* Color: intentionally omitted - MWC keeps its native Spitfire palette (type tokens only) */
+}
+
+/* ---- Composite type styles (mirror the SCSS mixins) ---- */
+.h0-neutral.h0-neutral {
+  font-family: var(--font-family-neutral) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+  font-size: var(--font-size-neutral-0) !important;
+  line-height: var(--line-height-neutral-0) !important;
+  letter-spacing: var(--letter-spacing-neutral-0) !important;
+}
+.h1-neutral.h1-neutral {
+  font-family: var(--font-family-neutral) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+  font-size: var(--font-size-neutral-1) !important;
+  line-height: var(--line-height-neutral-1) !important;
+  letter-spacing: var(--letter-spacing-neutral-1) !important;
+}
+.h2-neutral.h2-neutral {
+  font-family: var(--font-family-neutral) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+  font-size: var(--font-size-neutral-2) !important;
+  line-height: var(--line-height-neutral-2) !important;
+  letter-spacing: var(--letter-spacing-neutral-2) !important;
+}
+.h3-neutral.h3-neutral {
+  font-family: var(--font-family-neutral) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+  font-size: var(--font-size-neutral-3) !important;
+  line-height: var(--line-height-neutral-3) !important;
+  letter-spacing: var(--letter-spacing-neutral-3) !important;
+}
+.h4-neutral.h4-neutral {
+  font-family: var(--font-family-neutral) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+  font-size: var(--font-size-neutral-4) !important;
+  line-height: var(--line-height-neutral-4) !important;
+  letter-spacing: var(--letter-spacing-neutral-4) !important;
+}
+.h5-neutral.h5-neutral {
+  font-family: var(--font-family-neutral) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+  font-size: var(--font-size-neutral-5) !important;
+  line-height: var(--line-height-neutral-5) !important;
+  letter-spacing: var(--letter-spacing-neutral-5) !important;
+}
+.h6-neutral.h6-neutral {
+  font-family: var(--font-family-neutral) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+  font-size: var(--font-size-neutral-6) !important;
+  line-height: var(--line-height-neutral-6) !important;
+  letter-spacing: var(--letter-spacing-neutral-6) !important;
+}
+.body-1.body-1 {
+  font-family: var(--font-family-neutral) !important;
+  font-weight: var(--font-weight-neutral-regular) !important;
+  font-size: var(--font-size-neutral-body-1) !important;
+  line-height: var(--line-height-neutral-body-1) !important;
+  letter-spacing: var(--letter-spacing-neutral-body-1) !important;
+  margin-block-end: var(--paragraph-spacing-neutral-body-1) !important;
+}
+.body-1-emphasis.body-1-emphasis {
+  font-family: var(--font-family-neutral) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+  font-size: var(--font-size-neutral-body-1-emphasis) !important;
+  line-height: var(--line-height-neutral-body-1-emphasis) !important;
+  letter-spacing: var(--letter-spacing-neutral-body-1-emphasis) !important;
+  margin-block-end: var(--paragraph-spacing-neutral-body-1-emphasis) !important;
+}
+.body-2.body-2 {
+  font-family: var(--font-family-neutral) !important;
+  font-weight: var(--font-weight-neutral-regular) !important;
+  font-size: var(--font-size-neutral-body-2) !important;
+  line-height: var(--line-height-neutral-body-2) !important;
+  letter-spacing: var(--letter-spacing-neutral-body-2) !important;
+  margin-block-end: var(--paragraph-spacing-neutral-body-2) !important;
+}
+.body-2-emphasis.body-2-emphasis {
+  font-family: var(--font-family-neutral) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+  font-size: var(--font-size-neutral-body-2-emphasis) !important;
+  line-height: var(--line-height-neutral-body-2-emphasis) !important;
+  letter-spacing: var(--letter-spacing-neutral-body-2-emphasis) !important;
+  margin-block-end: var(--paragraph-spacing-neutral-body-2-emphasis) !important;
+}
+.body-3.body-3 {
+  font-family: var(--font-family-neutral) !important;
+  font-weight: var(--font-weight-neutral-regular) !important;
+  font-size: var(--font-size-neutral-body-3) !important;
+  line-height: var(--line-height-neutral-body-3) !important;
+  letter-spacing: var(--letter-spacing-neutral-body-3) !important;
+  margin-block-end: var(--paragraph-spacing-neutral-body-3) !important;
+}
+.body-3-emphasis.body-3-emphasis {
+  font-family: var(--font-family-neutral) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+  font-size: var(--font-size-neutral-body-3-emphasis) !important;
+  line-height: var(--line-height-neutral-body-3-emphasis) !important;
+  letter-spacing: var(--letter-spacing-neutral-body-3-emphasis) !important;
+  margin-block-end: var(--paragraph-spacing-neutral-body-3-emphasis) !important;
+}
+.h0-expressive.h0-expressive {
+  font-family: var(--font-family-expressive) !important;
+  font-weight: var(--font-weight-expressive-light) !important;
+  font-size: var(--font-size-expressive-0) !important;
+  line-height: var(--line-height-expressive-0) !important;
+  letter-spacing: var(--letter-spacing-expressive-0) !important;
+}
+.h1-expressive.h1-expressive {
+  font-family: var(--font-family-expressive) !important;
+  font-weight: var(--font-weight-expressive-light) !important;
+  font-size: var(--font-size-expressive-1) !important;
+  line-height: var(--line-height-expressive-1) !important;
+  letter-spacing: var(--letter-spacing-expressive-1) !important;
+}
+.h2-expressive.h2-expressive {
+  font-family: var(--font-family-expressive) !important;
+  font-weight: var(--font-weight-expressive-light) !important;
+  font-size: var(--font-size-expressive-2) !important;
+  line-height: var(--line-height-expressive-2) !important;
+  letter-spacing: var(--letter-spacing-expressive-2) !important;
+}
+.h3-expressive.h3-expressive {
+  font-family: var(--font-family-expressive) !important;
+  font-weight: var(--font-weight-expressive-light) !important;
+  font-size: var(--font-size-expressive-3) !important;
+  line-height: var(--line-height-expressive-3) !important;
+  letter-spacing: var(--letter-spacing-expressive-3) !important;
+}
+.h4-expressive.h4-expressive {
+  font-family: var(--font-family-expressive) !important;
+  font-weight: var(--font-weight-expressive-light) !important;
+  font-size: var(--font-size-expressive-4) !important;
+  line-height: var(--line-height-expressive-4) !important;
+  letter-spacing: var(--letter-spacing-expressive-4) !important;
+}
+.h5-expressive.h5-expressive {
+  font-family: var(--font-family-expressive) !important;
+  font-weight: var(--font-weight-expressive-light) !important;
+  font-size: var(--font-size-expressive-5) !important;
+  line-height: var(--line-height-expressive-5) !important;
+  letter-spacing: var(--letter-spacing-expressive-5) !important;
+}
+.h6-expressive.h6-expressive {
+  font-family: var(--font-family-expressive) !important;
+  font-weight: var(--font-weight-expressive-light) !important;
+  font-size: var(--font-size-expressive-6) !important;
+  line-height: var(--line-height-expressive-6) !important;
+  letter-spacing: var(--letter-spacing-expressive-6) !important;
+}
+.h1-cinematic.h1-cinematic {
+  font-family: var(--font-family-cinematic) !important;
+  font-weight: var(--font-weight-cinematic-bold) !important;
+  font-size: var(--font-size-cinematic-1) !important;
+  line-height: var(--line-height-cinematic-1) !important;
+  letter-spacing: var(--letter-spacing-cinematic-1) !important;
+  text-transform: uppercase !important;
+}
+.h2-cinematic.h2-cinematic {
+  font-family: var(--font-family-cinematic) !important;
+  font-weight: var(--font-weight-cinematic-bold) !important;
+  font-size: var(--font-size-cinematic-2) !important;
+  line-height: var(--line-height-cinematic-2) !important;
+  letter-spacing: var(--letter-spacing-cinematic-2) !important;
+  text-transform: uppercase !important;
+}
+.h3-cinematic.h3-cinematic {
+  font-family: var(--font-family-cinematic) !important;
+  font-weight: var(--font-weight-cinematic-bold) !important;
+  font-size: var(--font-size-cinematic-3) !important;
+  line-height: var(--line-height-cinematic-3) !important;
+  letter-spacing: var(--letter-spacing-cinematic-3) !important;
+  text-transform: uppercase !important;
+}
+.h4-cinematic.h4-cinematic {
+  font-family: var(--font-family-cinematic) !important;
+  font-weight: var(--font-weight-cinematic-bold) !important;
+  font-size: var(--font-size-cinematic-4) !important;
+  line-height: var(--line-height-cinematic-4) !important;
+  letter-spacing: var(--letter-spacing-cinematic-4) !important;
+  text-transform: uppercase !important;
+}
+.h5-cinematic.h5-cinematic {
+  font-family: var(--font-family-cinematic) !important;
+  font-weight: var(--font-weight-cinematic-bold) !important;
+  font-size: var(--font-size-cinematic-5) !important;
+  line-height: var(--line-height-cinematic-5) !important;
+  letter-spacing: var(--letter-spacing-cinematic-5) !important;
+  text-transform: uppercase !important;
+}
+.h6-cinematic.h6-cinematic {
+  font-family: var(--font-family-cinematic) !important;
+  font-weight: var(--font-weight-cinematic-bold) !important;
+  font-size: var(--font-size-cinematic-6) !important;
+  line-height: var(--line-height-cinematic-6) !important;
+  letter-spacing: var(--letter-spacing-cinematic-6) !important;
+  text-transform: uppercase !important;
+}
+.h7-cinematic.h7-cinematic {
+  font-family: var(--font-family-cinematic) !important;
+  font-weight: var(--font-weight-cinematic-bold) !important;
+  font-size: var(--font-size-cinematic-7) !important;
+  line-height: var(--line-height-cinematic-7) !important;
+  letter-spacing: var(--letter-spacing-cinematic-7) !important;
+  text-transform: uppercase !important;
+}
+.control-label.control-label {
+  font-family: var(--font-family-cinematic) !important;
+  font-weight: var(--font-weight-cinematic-medium) !important;
+  font-size: var(--font-size-cinematic-control-label) !important;
+  line-height: var(--line-height-cinematic-control-label) !important;
+  letter-spacing: var(--letter-spacing-cinematic-control-label) !important;
+  text-transform: uppercase !important;
+}
+
+/* Tabular figures for prices / counts / data (typography.md "Numbers") */
+.tabular-nums {
+  font-variant-numeric: tabular-nums !important;
+  font-feature-settings: 'tnum' 1 !important;
+}
+
+/* Numbers: tabular (lining) figures for prices & counts (typography.md "Numbers") */
+.snippet-data-prices, .price, .list_price, .total-price-est {
+  font-variant-numeric: tabular-nums !important;
+  font-feature-settings: 'tnum' 1 !important;
+}
+
+/* =================================================================
+   NEUTRAL UTILITY MAPPING  —  pin the theme's utility type classes
+   to the Neutral token scale (typography-tokens.json). Single-class
+   (0,1,0) !important: the Expressive/Cinematic composites are (0,2,0)
+   !important, so they still win where applied.
+   Headings + content body only; nav/buttons/UI chrome keep component
+   sizing (Neutral font already applies via --font-family-base).
+   ================================================================= */
+
+/* Headings (fluid clamp -> fixed token level) */
+.u-heading-xl {
+  font-size: var(--font-size-neutral-0) !important;       /* H0 60px */
+  line-height: var(--line-height-neutral-0) !important;
+  letter-spacing: var(--letter-spacing-neutral-0) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+}
+.u-heading-lg {
+  font-size: var(--font-size-neutral-2) !important;       /* H2 36px */
+  line-height: var(--line-height-neutral-2) !important;
+  letter-spacing: var(--letter-spacing-neutral-2) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+}
+.u-heading-sm {
+  font-size: var(--font-size-neutral-5) !important;       /* H5 20px (exact match) */
+  line-height: var(--line-height-neutral-5) !important;
+  letter-spacing: var(--letter-spacing-neutral-5) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+}
+.u-heading-xs {
+  font-size: var(--font-size-neutral-6) !important;       /* H6 16px */
+  line-height: var(--line-height-neutral-6) !important;
+  letter-spacing: var(--letter-spacing-neutral-6) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+}
+
+/* Content body */
+.c-rte {
+  font-size: var(--font-size-neutral-body-1) !important;  /* Body 1 16px (was 18px) */
+  line-height: var(--line-height-neutral-body-1) !important;
+  letter-spacing: var(--letter-spacing-neutral-body-1) !important;
+  font-weight: var(--font-weight-neutral-regular) !important;
+}
+.c-rte p { margin-block-end: var(--paragraph-spacing-neutral-body-1) !important; }
+.c-rte p:last-child { margin-block-end: 0 !important; }
+
+.u-text-lg {
+  font-size: var(--font-size-neutral-body-1) !important;  /* Body 1 16px (was 20px - token set has no >16px body) */
+  line-height: var(--line-height-neutral-body-1) !important;
+  letter-spacing: var(--letter-spacing-neutral-body-1) !important;
+  font-weight: var(--font-weight-neutral-regular) !important;
+}
+.u-text-sm {
+  font-size: var(--font-size-neutral-body-2) !important;  /* Body 2 14px (exact match) */
+  line-height: var(--line-height-neutral-body-2) !important;
+  letter-spacing: var(--letter-spacing-neutral-body-2) !important;
+  font-weight: var(--font-weight-neutral-regular) !important;
+}
+.card-text {
+  font-size: var(--font-size-neutral-body-2) !important;  /* Body 2 14px */
+  line-height: var(--line-height-neutral-body-2) !important;
+  letter-spacing: var(--letter-spacing-neutral-body-2) !important;
+  font-weight: var(--font-weight-neutral-regular) !important;
+}
+.audio-name {
+  font-size: var(--font-size-neutral-body-2-emphasis) !important;  /* Body 2 Emphasis 14px/550 */
+  line-height: var(--line-height-neutral-body-2-emphasis) !important;
+  letter-spacing: var(--letter-spacing-neutral-body-2-emphasis) !important;
+  font-weight: var(--font-weight-neutral-medium) !important;
+}
+/* ordered last so it wins on elements that also carry .u-text-sm */
+.sub-text {
+  font-size: var(--font-size-neutral-body-3) !important;  /* Body 3 12px */
+  line-height: var(--line-height-neutral-body-3) !important;
+  letter-spacing: var(--letter-spacing-neutral-body-3) !important;
+  font-weight: var(--font-weight-neutral-regular) !important;
+}

@@ -1,0 +1,3 @@
+# Internal design study. Not for indexing or crawling.
+User-agent: *
+Disallow: /

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Spitfire Token Studies</title>
+<style>
+  /* GT trial families, self-hosted from the New-Tokens folders so the hub
+     wears the same type system as the rebranded pages it links to. */
+  @font-face {
+    font-family: "GT Flaire Trial VF";
+    src: url("Tenebra%20New-Tokens/GT-Flaire-Trial-VF.woff2") format("woff2");
+    font-weight: 100 900; font-style: normal; font-display: swap;
+  }
+  @font-face {
+    font-family: "GT Ultra Fine Trial";
+    src: url("Tenebra%20New-Tokens/GT-Ultra-Fine-Light-Trial.woff2") format("woff2");
+    font-weight: 300; font-style: normal; font-display: swap;
+  }
+
+  :root {
+    --bg: #070709;
+    --surface: #101014;
+    --line: #1f1f25;
+    --text: #C6C6CB;
+    --muted: #74747d;
+    --white: #ffffff;
+    --accent: #FF3038;
+    --accent-soft: rgba(255,48,56,.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "GT Flaire Trial VF", system-ui, -apple-system, sans-serif;
+    font-weight: 420;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* faint radial glow + vignette for cinematic depth */
+    background-image:
+      radial-gradient(120% 80% at 50% -10%, rgba(255,48,56,.10) 0%, transparent 55%),
+      radial-gradient(100% 100% at 50% 120%, rgba(255,255,255,.03) 0%, transparent 60%);
+    background-attachment: fixed;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: clamp(40px, 7vw, 96px) clamp(20px, 5vw, 48px) 64px;
+    flex: 1 0 auto;
+  }
+
+  /* ---- masthead ---- */
+  .eyebrow {
+    font-family: "GT Flaire Trial VF", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 22px;
+  }
+  .eyebrow::after {
+    content: ""; height: 1px; flex: 1; max-width: 120px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+  }
+
+  h1 {
+    font-family: "GT Ultra Fine Trial", serif;
+    font-weight: 300;
+    font-size: clamp(40px, 7vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -.01em;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  h1 em { font-style: italic; color: var(--text); }
+
+  .lede {
+    max-width: 52ch;
+    font-size: clamp(15px, 1.6vw, 17px);
+    color: var(--muted);
+  }
+
+  /* ---- product groups ---- */
+  .group { margin-top: clamp(40px, 5vw, 64px); }
+
+  .group__head {
+    display: flex; align-items: baseline; gap: 14px;
+    padding-bottom: 16px; margin-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .group__title {
+    font-family: "GT Ultra Fine Trial", serif;
+    font-weight: 300;
+    font-size: clamp(22px, 3vw, 30px);
+    color: var(--white);
+  }
+  .group__sub {
+    font-size: 12px; letter-spacing: .04em; color: var(--muted);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(16px, 2.2vw, 24px);
+  }
+
+  /* ---- card ---- */
+  .card {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 10;
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    isolation: isolate;
+    transition: transform .4s cubic-bezier(.2,.7,.2,1),
+                border-color .4s ease, box-shadow .4s ease;
+  }
+  .card__media {
+    position: absolute; inset: 0; z-index: -2;
+    background-size: cover; background-position: center;
+    transform: scale(1.02);
+    transition: transform .6s cubic-bezier(.2,.7,.2,1), filter .6s ease;
+    filter: saturate(.9) brightness(.78);
+  }
+  .card::after { /* legibility gradient */
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg,
+      rgba(7,7,9,.10) 0%, rgba(7,7,9,.40) 45%, rgba(7,7,9,.92) 100%);
+  }
+
+  .card__body {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: clamp(18px, 2.4vw, 26px);
+    gap: 6px;
+  }
+  .card__name {
+    font-family: "GT Ultra Fine Trial", serif;
+    font-weight: 300;
+    font-size: clamp(20px, 2.4vw, 26px);
+    color: var(--white);
+    line-height: 1.1;
+  }
+  .card__desc {
+    font-size: 13px;
+    color: var(--text);
+    opacity: .82;
+    max-width: 34ch;
+  }
+
+  /* variant tag, top-left */
+  .tag {
+    position: absolute; top: 16px; left: 16px;
+    font-family: "GT Flaire Trial VF", sans-serif;
+    font-weight: 700;
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 6px 11px;
+    border-radius: 999px;
+    backdrop-filter: blur(6px);
+  }
+  .tag--original {
+    color: var(--text);
+    border: 1px solid rgba(198,198,203,.45);
+    background: rgba(16,16,20,.45);
+  }
+  .tag--tokens {
+    color: var(--white);
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    box-shadow: 0 4px 18px var(--accent-soft);
+  }
+
+  /* hover cue, top-right */
+  .cue {
+    position: absolute; top: 16px; right: 16px;
+    width: 34px; height: 34px; border-radius: 999px;
+    display: grid; place-items: center;
+    border: 1px solid rgba(255,255,255,.18);
+    background: rgba(16,16,20,.4);
+    backdrop-filter: blur(6px);
+    color: var(--white);
+    opacity: 0; transform: translateY(-4px) scale(.9);
+    transition: opacity .35s ease, transform .35s ease, background .35s ease;
+  }
+  .cue svg { width: 15px; height: 15px; }
+
+  .card:hover, .card:focus-visible {
+    transform: translateY(-4px);
+    border-color: rgba(255,48,56,.55);
+    box-shadow: 0 18px 50px rgba(0,0,0,.55), 0 0 0 1px rgba(255,48,56,.25);
+    outline: none;
+  }
+  .card:hover .card__media, .card:focus-visible .card__media {
+    transform: scale(1.08);
+    filter: saturate(1.05) brightness(.86);
+  }
+  .card:hover .cue, .card:focus-visible .cue {
+    opacity: 1; transform: translateY(0) scale(1);
+    background: var(--accent); border-color: var(--accent);
+  }
+
+  /* ---- footer ---- */
+  footer {
+    flex-shrink: 0;
+    border-top: 1px solid var(--line);
+    padding: 24px clamp(20px, 5vw, 48px);
+    display: flex; flex-wrap: wrap; gap: 8px 20px;
+    align-items: center; justify-content: space-between;
+    font-size: 12px; color: var(--muted);
+  }
+  footer a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); }
+  footer a:hover { color: var(--accent); border-color: var(--accent); }
+  .footer__links { display: flex; gap: 18px; }
+
+  @media (max-width: 680px) {
+    .grid { grid-template-columns: 1fr; }
+    .card { aspect-ratio: 16 / 11; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, .card, .card__media, .cue { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <p class="eyebrow">Spitfire Audio · Design tokens</p>
+    <h1>Token <em>Studies</em></h1>
+    <p class="lede">Two Spitfire product pages, each shown twice: the original, and the
+      same page rebranded onto the typography token system. Pick a door.</p>
+
+    <!-- ============ TENEBRA ============ -->
+    <section class="group">
+      <div class="group__head">
+        <span class="group__title">Tenebra</span>
+        <span class="group__sub">by The Newton Brothers · Cinematic Horror</span>
+      </div>
+      <div class="grid">
+
+        <a class="card" href="https://www.spitfireaudio.com/products/tenebra-by-the-newton-brothers" target="_blank" rel="noopener">
+          <div class="card__media" style="background-image:url('https://www.spitfireaudio.com/cdn/shop/files/smc0776_cinemascope_press.jpg?width=1280')"></div>
+          <span class="tag tag--original">Original · Live ↗</span>
+          <span class="cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          <div class="card__body">
+            <span class="card__name">Original</span>
+            <span class="card__desc">Live production page on spitfireaudio.com</span>
+          </div>
+        </a>
+
+        <a class="card" href="Tenebra%20New-Tokens/index.html">
+          <div class="card__media" style="background-image:url('https://www.spitfireaudio.com/cdn/shop/files/smc0776_cinemascope_press.jpg?width=1280')"></div>
+          <span class="tag tag--tokens">Tokens</span>
+          <span class="cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <div class="card__body">
+            <span class="card__name">Token rebrand</span>
+            <span class="card__desc">GT typography tokens · sharper-noir palette</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ============ MERVYN ============ -->
+    <section class="group">
+      <div class="group__head">
+        <span class="group__title">Mervyn Warren Choir</span>
+        <span class="group__sub">Expressive Choir Virtual Instrument</span>
+      </div>
+      <div class="grid">
+
+        <a class="card" href="https://www.spitfireaudio.com/products/mervyn-warren-choir" target="_blank" rel="noopener">
+          <div class="card__media" style="background-image:url('https://www.spitfireaudio.com/cdn/shop/files/smc0734_square.jpg?width=1000')"></div>
+          <span class="tag tag--original">Original · Live ↗</span>
+          <span class="cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+          <div class="card__body">
+            <span class="card__name">Original</span>
+            <span class="card__desc">Live production page on spitfireaudio.com</span>
+          </div>
+        </a>
+
+        <a class="card" href="Mervyn%20Warren%20Choir%20New-Tokens/index.html">
+          <div class="card__media" style="background-image:url('https://www.spitfireaudio.com/cdn/shop/files/smc0734_square.jpg?width=1000')"></div>
+          <span class="tag tag--tokens">Tokens</span>
+          <span class="cue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          <div class="card__body">
+            <span class="card__name">Token rebrand</span>
+            <span class="card__desc">GT typography tokens applied to the choir page</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Spitfire Token Studies · internal design exercise</span>
+    <span class="footer__links">
+      <a href="TOKENS.md">TOKENS.md</a>
+      <a href="SUMMARY.md">SUMMARY.md</a>
+    </span>
+  </footer>
+</body>
+</html>

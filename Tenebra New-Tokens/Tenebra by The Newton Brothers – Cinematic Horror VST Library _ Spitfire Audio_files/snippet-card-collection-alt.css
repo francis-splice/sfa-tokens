@@ -1,0 +1,25 @@
+.snippet-card-collection-alt {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  padding: 1rem;
+  background-color: var(--colour-white);
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-sm);
+}
+.snippet-card-collection-alt img,
+.snippet-card-collection-alt svg {
+  height: 2.5rem;
+  width: 2.5rem;
+  object-fit: cover;
+  border-radius: var(--border-radius-xs);
+}
+.snippet-card-collection-alt a {
+  text-decoration: none;
+  font-weight: 600;
+  color: inherit;
+}
+.snippet-card-collection-alt:hover, .snippet-card-collection-alt:focus {
+  border-color: var(--colour-mine-shaft);
+}
