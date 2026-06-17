@@ -362,7 +362,21 @@
   }
   var TOKENMAP = buildTokenMap();
 
-  var overlay = null, tip = null, detected = [], repoScheduled = false;
+  var overlay = null, tip = null, detected = [], repoScheduled = false, byEl = null;
+  var TOKEN_SEL = TOKENMAP.map(function (t) { return t.sel; }).join(",");
+  function tokenFor(node) { for (var i = 0; i < TOKENMAP.length; i++) { if (node.matches(TOKENMAP[i].sel)) return TOKENMAP[i]; } return null; }
+  // Delegated hover: map whatever is under the cursor to its token via closest().
+  // Robust to child text (e.g. span inside .audio-name), overflowing glyphs, and
+  // elements rendered after the initial scan (lazy audio demos).
+  function onOver(e) {
+    var t = e.target;
+    var m = t && t.closest ? t.closest(TOKEN_SEL) : null;
+    if (!m || (m.closest && m.closest("#sfa-type-tweak"))) { hideTip(); return; }
+    if (activeD && activeD.el === m) return;
+    var d = (byEl && byEl.get(m)) || { el: m, t: tokenFor(m), box: null };
+    if (!d.t) return;
+    setActive(d);
+  }
 
   function scan() {
     detected = [];
@@ -382,25 +396,21 @@
   function buildOverlay() {
     overlay = el("div"); overlay.id = "sfa-tt-overlay";
     document.body.appendChild(overlay);
+    byEl = new Map();
     detected.forEach(function (d) {
       var box = el("div"); box.className = "sfa-tt-box dir-" + d.t.dir;
       if (d.t.heading) { var chip = el("div"); chip.className = "sfa-tt-chip"; chip.textContent = d.t.short; box.appendChild(chip); }
       overlay.appendChild(box); d.box = box;
-      d._enter = function () { setActive(d); };
-      // Latch: keep the row + box highlight after roll-off (until another element
-      // is hovered). Only hide the floating tip, which can't track scroll.
-      d._leave = function () { hideTip(); };
-      d.el.addEventListener("mouseenter", d._enter);
-      d.el.addEventListener("mouseleave", d._leave);
+      byEl.set(d.el, d);
     });
+    document.addEventListener("mouseover", onOver);
     reposition();
   }
 
   function teardownOverlay() {
     clearActive();
-    detected.forEach(function (d) {
-      if (d._enter) { d.el.removeEventListener("mouseenter", d._enter); d.el.removeEventListener("mouseleave", d._leave); }
-    });
+    document.removeEventListener("mouseover", onOver);
+    byEl = null;
     if (overlay) { overlay.remove(); overlay = null; }
   }
 
