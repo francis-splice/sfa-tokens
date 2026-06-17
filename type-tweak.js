@@ -386,6 +386,15 @@
       if (node.closest("#sfa-type-tweak")) { m = null; break; } // over the panel: ignore
       var c = node.closest(TOKEN_SEL);
       if (c && c.textContent && c.textContent.trim()) { m = c; break; }
+      // The track name (.audio-name) is a narrow box, but an audio demo is one
+      // logical unit, so hovering anywhere on the card (play button, name, the
+      // empty space beside it, or the waveform below) should resolve to the name.
+      // Sliding straight down from the section heading lands on the card, not dead
+      // air. The card has exactly one token, so querySelector(TOKEN_SEL) is its name.
+      // (Tenebra's stretched-link::after fills the card; Mervyn's doesn't, so we key
+      // off the card element itself, which is present in the hit-stack either way.)
+      var card = node.closest("audio-demo, .snippet-product-audio-demo, .audio-heading");
+      if (card) { var nm = card.querySelector(TOKEN_SEL); if (nm && nm.textContent && nm.textContent.trim()) { m = nm; break; } }
     }
     if (!m) { hideTip(); return; }
     if (activeD && activeD.el === m) return;
@@ -433,13 +442,13 @@
       overlay.appendChild(box); d.box = box;
       byEl.set(d.el, d);
     });
-    document.addEventListener("mouseover", onOver);
+    document.addEventListener("mousemove", onOver);
     reposition();
   }
 
   function teardownOverlay() {
     clearActive();
-    document.removeEventListener("mouseover", onOver);
+    document.removeEventListener("mousemove", onOver);
     byEl = null;
     if (overlay) { overlay.remove(); overlay = null; }
   }
