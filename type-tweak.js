@@ -121,9 +121,9 @@
       "#sfa-tt-foot .exp{background:#FF3038;border-color:#FF3038;color:#fff}",
       "#sfa-tt-foot button:hover{border-color:#FF3038}",
       "#sfa-tt-err{padding:18px;font-size:12px;color:#ff8a8f}",
-      "#sfa-tt-labels{margin-left:auto;align-self:center;background:#161620;border:1px solid #2a2a31;color:#C6C6CB;font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:6px 10px;border-radius:999px;cursor:pointer}",
-      "#sfa-tt-labels.on{background:#FF3038;border-color:#FF3038;color:#fff}",
-      "#sfa-tt-labels:hover{border-color:#FF3038}",
+      "#sfa-tt-legend{display:flex;gap:14px;padding:9px 18px;border-bottom:1px solid #1f1f25;font-size:10px;letter-spacing:.06em;color:#9a9aa2}",
+      "#sfa-tt-legend span{display:inline-flex;align-items:center;gap:5px}",
+      "#sfa-tt-legend i{width:9px;height:9px;border-radius:2px}",
       ".sfa-tt-rowwrap.hi{background:rgba(255,48,56,.14)}",
       "#sfa-tt-overlay{position:fixed;inset:0;z-index:2147482000;pointer-events:none}",
       ".sfa-tt-box{position:fixed;pointer-events:none;outline:1px dashed rgba(255,255,255,.3);outline-offset:1px}",
@@ -182,7 +182,7 @@
       overrides[item.cssVar] = val;
       applyVar(item.cssVar, val);
       saveOverrides();
-      if (overlayOn) scheduleReposition();
+      if (overlay) scheduleReposition();
     }
     range.addEventListener("input", function () { num.value = range.value; commit(+range.value); });
     num.addEventListener("input", function () { range.value = num.value; commit(+num.value); });
@@ -215,7 +215,7 @@
     var launch = document.createElement("button");
     launch.id = "sfa-tt-launch";
     launch.innerHTML = '<span class="d"></span> Type tokens';
-    launch.addEventListener("click", function () { root.classList.toggle("open"); });
+    launch.addEventListener("click", function () { setOpen(!root.classList.contains("open")); });
     root.appendChild(launch);
 
     drawer = document.createElement("div");
@@ -224,16 +224,19 @@
     var head = document.createElement("div");
     head.id = "sfa-tt-head";
     head.innerHTML = "<div><h2>Type tokens</h2><p>Live size &amp; weight. Tweaks persist; export when happy.</p></div>";
-    var lab = document.createElement("button");
-    lab.id = "sfa-tt-labels"; lab.textContent = "Labels";
-    lab.title = "Toggle token labels on the page";
-    lab.addEventListener("click", toggleLabels);
-    head.appendChild(lab);
     var close = document.createElement("button");
     close.id = "sfa-tt-close"; close.innerHTML = "&times;"; close.title = "Close";
-    close.addEventListener("click", function () { root.classList.remove("open"); });
+    close.addEventListener("click", function () { setOpen(false); });
     head.appendChild(close);
     drawer.appendChild(head);
+
+    var legend = document.createElement("div");
+    legend.id = "sfa-tt-legend";
+    legend.innerHTML =
+      '<span><i style="background:#7aa2ff"></i>Neutral</span>' +
+      '<span><i style="background:#ff5d8f"></i>Expressive</span>' +
+      '<span><i style="background:#ffc24b"></i>Cinematic</span>';
+    drawer.appendChild(legend);
 
     var body = document.createElement("div");
     body.id = "sfa-tt-body";
@@ -357,7 +360,7 @@
   }
   var TOKENMAP = buildTokenMap();
 
-  var overlayOn = false, overlay = null, tip = null, detected = [], repoScheduled = false;
+  var overlay = null, tip = null, detected = [], repoScheduled = false;
 
   function scan() {
     detected = [];
@@ -435,6 +438,7 @@
       ref.wrap.classList.toggle("hi", on);
       if (on) { var det = ref.wrap.closest("details"); if (det && !det.open) det.open = true; }
     });
+    if (on) { var sref = els[d.t.sizeVar]; if (sref && sref.wrap) sref.wrap.scrollIntoView({ block: "nearest" }); }
   }
   // panel row hover -> flash the elements that use that token
   function highlightByVar(cssVar, on) {
@@ -444,11 +448,10 @@
     });
   }
 
-  function toggleLabels() {
-    overlayOn = !overlayOn;
-    var btn = document.getElementById("sfa-tt-labels");
-    if (btn) btn.classList.toggle("on", overlayOn);
-    if (overlayOn) { scan(); buildOverlay(); rafId = requestAnimationFrame(tick); }
+  // Overlay lifecycle is tied to the panel being open (no separate toggle).
+  function setOpen(open) {
+    root.classList.toggle("open", open);
+    if (open) { if (!overlay) { scan(); buildOverlay(); rafId = requestAnimationFrame(tick); } }
     else { if (rafId) cancelAnimationFrame(rafId); rafId = null; teardownOverlay(); }
   }
 
