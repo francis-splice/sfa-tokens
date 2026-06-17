@@ -252,7 +252,7 @@
      PROOF / WALKTHROUGH
      =========================================================== */
   .proof{padding:clamp(50px,6vw,84px) 0}
-  .proof__grid{display:grid;grid-template-columns:1.25fr .85fr;gap:30px;margin-top:42px;align-items:start}
+  .proof .video{max-width:880px;margin-top:42px}
   .video{position:relative;border-radius:var(--r-md);overflow:hidden;aspect-ratio:16/9;border:1px solid var(--line);
     background:linear-gradient(120deg,#1a1320,#0e0e16);display:grid;place-items:center;cursor:pointer}
   .video::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 45%,rgba(232,28,154,.22),transparent 60%)}
@@ -262,23 +262,60 @@
   .video__play svg{width:30px;height:30px;color:#fff;margin-left:4px}
   .video__cap{position:absolute;left:18px;bottom:16px;z-index:1;font-size:13px;color:var(--text);font-weight:600;
     background:rgba(8,8,11,.55);backdrop-filter:blur(6px);padding:7px 12px;border-radius:999px;border:1px solid var(--line)}
-  .demos{display:flex;flex-direction:column;gap:10px}
-  .demo{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:var(--r-sm);background:var(--surface);border:1px solid var(--line-soft);
-    transition:border-color .25s,background .25s;cursor:pointer}
-  .demo:hover{border-color:#2f2f3a;background:var(--surface-2)}
-  .demo__play{width:38px;height:38px;border-radius:50%;flex:none;border:1px solid var(--line);background:rgba(255,255,255,.04);display:grid;place-items:center;color:var(--pink-ink);transition:.25s}
-  .demo:hover .demo__play{background:var(--grad);color:#fff;border-color:transparent}
-  .demo__play svg{width:14px;height:14px;margin-left:2px}
-  .demo__meta{min-width:0}
-  .demo__name{font-size:14px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .demo__cat{font-size:11.5px;color:var(--muted)}
-  .demo__wave{margin-left:auto;display:flex;align-items:center;gap:2px;height:24px}
-  .demo__wave i{width:2px;border-radius:2px;background:linear-gradient(180deg,var(--pink-ink),var(--violet));opacity:.55}
+  /* shared play/pause icon toggle (any .is-playing ancestor) */
+  .play-ic{display:block}.pause-ic{display:none}
+  .is-playing .play-ic{display:none}.is-playing .pause-ic{display:block}
   .quote{margin-top:40px;max-width:64ch;position:relative}
   .quote__mark{display:block;font-size:clamp(48px,7vw,76px);line-height:.5;color:var(--pink-ink);font-weight:800;margin-bottom:18px}
   .quote p{font-size:clamp(19px,2.4vw,26px);font-weight:600;color:#fff;letter-spacing:-.012em;line-height:1.34}
   .quote cite{display:block;margin-top:14px;color:var(--muted);font-size:14px;font-style:normal}
-  @media(max-width:820px){.proof__grid{grid-template-columns:1fr}}
+  .quote{margin-top:48px}
+
+  /* ===========================================================
+     AUDIO: hero hook · tile play · sticky mini-player
+     =========================================================== */
+  .hero__listen{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:26px}
+  .listen-btn{display:inline-flex;align-items:center;gap:11px;padding:11px 20px 11px 11px;border-radius:999px;
+    border:1px solid var(--line);background:rgba(255,255,255,.04);color:#fff;font:inherit;font-size:14.5px;font-weight:700;cursor:pointer;
+    transition:border-color .25s,background .25s,transform .25s cubic-bezier(.2,.7,.2,1)}
+  .listen-btn:hover{border-color:#3a3a46;background:rgba(255,255,255,.07);transform:translateY(-1px)}
+  .listen-btn__ic{width:34px;height:34px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--grad);color:#fff;
+    box-shadow:0 6px 18px rgba(232,28,154,.4)}
+  .listen-btn__ic svg{width:15px;height:15px}.listen-btn__ic .play-ic{margin-left:2px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{display:inline-flex;align-items:center;gap:7px;padding:9px 14px;border-radius:999px;border:1px solid var(--line);
+    background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:color .2s,border-color .2s,background .2s}
+  .chip:hover,.chip.is-active{color:#fff;border-color:var(--pink);background:rgba(232,28,154,.1)}
+  .chip svg{width:11px;height:11px;color:var(--pink-ink)}
+
+  .tile__play{position:absolute;top:11px;right:11px;z-index:2;width:36px;height:36px;border-radius:50%;border:0;cursor:pointer;
+    display:grid;place-items:center;color:#fff;background:rgba(8,8,11,.55);backdrop-filter:blur(6px);
+    opacity:0;transform:translateY(-4px) scale(.9);transition:opacity .28s ease,transform .28s cubic-bezier(.2,.7,.2,1),background .25s,box-shadow .25s}
+  .tile:hover .tile__play,.tile:focus-within .tile__play{opacity:1;transform:none}
+  .tile__play:hover{background:var(--grad)}
+  .tile__play svg{width:15px;height:15px}.tile__play .play-ic{margin-left:2px}
+  .tile.is-playing .tile__play{opacity:1;transform:none;background:var(--grad);box-shadow:0 0 0 4px rgba(232,28,154,.28)}
+  .tile.is-playing{border-color:rgba(232,28,154,.6);box-shadow:0 0 0 1px rgba(232,28,154,.5),0 14px 40px rgba(0,0,0,.5)}
+
+  .mini{position:fixed;left:0;right:0;bottom:0;z-index:70;transform:translateY(115%);
+    transition:transform .5s cubic-bezier(.2,.7,.2,1);background:rgba(13,13,18,.92);backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+  .mini.is-open{transform:none}
+  .mini__in{max-width:var(--maxw);margin:0 auto;padding:11px var(--pad);display:flex;align-items:center;gap:14px}
+  .mini__art{width:46px;height:46px;border-radius:9px;object-fit:cover;flex:none;border:1px solid var(--line)}
+  .mini__meta{min-width:0;width:clamp(110px,20vw,210px)}
+  .mini__name{font-size:13.5px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mini__sub{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mini__btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#fff;cursor:pointer;
+    display:grid;place-items:center;flex:none;transition:border-color .2s,background .2s}
+  .mini__btn:hover{border-color:#3a3a46;background:rgba(255,255,255,.08)}
+  .mini__btn svg{width:15px;height:15px}
+  .mini__play{background:var(--grad);border:0;width:42px;height:42px;box-shadow:0 6px 18px rgba(232,28,154,.4)}
+  .mini__play svg{width:17px;height:17px}.mini__play .play-ic{margin-left:1px}
+  .mini__bar{flex:1;height:5px;border-radius:999px;background:rgba(255,255,255,.1);cursor:pointer;position:relative;min-width:60px}
+  .mini__fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--grad);border-radius:999px}
+  .mini__time{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;flex:none;min-width:38px;text-align:right}
+  .mini__close{margin-left:2px}
+  @media(max-width:620px){.mini__meta{width:auto;flex:1}.mini__bar,.mini__time,.mini__close{display:none}}
 
   /* ===========================================================
      PLATFORM BAND (more than originals)
@@ -402,6 +439,16 @@
           Instant access · cancel anytime
         </span>
       </div>
+      <div class="hero__listen">
+        <button class="listen-btn" id="heroPlay" type="button" aria-label="Hear the Originals collection">
+          <span class="listen-btn__ic">
+            <svg class="play-ic" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg class="pause-ic" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+          </span>
+          Hear the collection
+        </button>
+        <div class="chips" id="heroChips"></div>
+      </div>
     </div>
     <div class="marquee" aria-hidden="true"><div class="marquee__row" id="marquee"></div></div>
     <div class="wrap trust">
@@ -467,12 +514,9 @@
         <span class="eyebrow">Hear it · See it</span>
         <h2>Sounds you already know.</h2>
       </div>
-      <div class="proof__grid">
-        <div class="video reveal" role="button" aria-label="Play the Originals walkthrough">
-          <div class="video__play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <span class="video__cap">Originals on INSTRUMENT: walkthrough</span>
-        </div>
-        <div class="demos reveal" id="demos"></div>
+      <div class="video reveal" role="button" aria-label="Play the Originals walkthrough">
+        <div class="video__play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        <span class="video__cap">Originals on INSTRUMENT: walkthrough</span>
       </div>
       <blockquote class="quote reveal">
         <span class="quote__mark" aria-hidden="true">“</span>
@@ -608,11 +652,15 @@
         <div class="tile__body"><span class="tile__cat">${cat}</span><span class="tile__name">${name}</span></div>
       </a>`);
   });
-  LIVE.forEach(([slug,name,cat,ext])=>{
-    /* real covers already carry their title in the artwork, so let them stand clean */
+  LIVE.forEach(([slug,name,cat,ext],i)=>{
+    /* covers carry their own title; the play button previews the real demo */
     grid.insertAdjacentHTML("beforeend",
       `<a class="tile" href="https://splice.com/plans/checkout?products=1064fbac-424b-4a68-8eab-981ad9cc2aef" aria-label="${name}, ${cat}" title="${name}">
         <img src="assets/covers/${slug}.${ext}" alt="${name}" loading="lazy" width="800" height="800">
+        <button class="tile__play" type="button" data-i="${i}" aria-label="Preview ${name}">
+          <svg class="play-ic" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="pause-ic" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+        </button>
       </a>`);
   });
   document.getElementById("titleCount").textContent = (LIVE.length + NEW.length);
@@ -622,27 +670,104 @@
   const mqSet = LIVE.map(([slug,name,,ext])=>`<img src="assets/covers/${slug}.${ext}" alt="" width="800" height="800" loading="lazy">`).join("");
   mq.innerHTML = mqSet + mqSet;
 
-  /* audio demo rows (representative) */
-  const demoData = [
-    ["Cinematic Soft Piano","Keys"],
-    ["Intimate Strings","Strings"],
-    ["Epic Choir","Vocals"],
-    ["Wurli","Keys"],
-    ["Cinematic Frozen Strings","Strings"]
-  ];
-  const demos = document.getElementById("demos");
-  const bars = n => Array.from({length:n},(_,i)=>{
-    const h = 6 + Math.round(18*Math.abs(Math.sin(i*1.7)+0.3*Math.cos(i*0.6)));
-    return `<i style="height:${Math.min(h,24)}px"></i>`;
-  }).join("");
-  demoData.forEach(([name,cat])=>{
-    demos.insertAdjacentHTML("beforeend",
-      `<div class="demo" role="button" aria-label="Play ${name} demo">
-        <span class="demo__play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-        <div class="demo__meta"><div class="demo__name">${name}</div><div class="demo__cat">${cat}</div></div>
-        <div class="demo__wave">${bars(22)}</div>
-      </div>`);
+  /* ---- audio: real Spitfire demo MP3s, streamed from the CDN ---- */
+  const CDN = "https://www.spitfireaudio.com/cdn/shop/files/";
+  const AUDIO = {
+    "cinematic-soft-piano":"originals-cinematic-soft-piano-standstill-homay-schmitz.mp3?v=15458761482868875053",
+    "felt-piano":"originals-felt-piano-the-ball-louis-rugg.mp3?v=10252729651553650414",
+    "intimate-strings":"originals-intimate-strings-a-souvenir-homay-schmitz.mp3?v=12364324515598839262",
+    "epic-strings":"originals-epic-strings-in-between-all-the-worlds-louis-rugg.mp3?v=18131819751967794063",
+    "epic-choir":"WhispersInTheDark.mp3?v=7058213892279627068",
+    "epic-brass-and-woodwinds":"originals-epic-brass-and-woodwinds-that-s-a-lotta-axolotl-louis-rugg.mp3?v=13923170151942518507",
+    "cinematic-percussion":"originals-cinematic-percussion-supremacy-oliver-patrice-weder.mp3?v=7752773818324065130",
+    "intimate-grand-piano":"WhileTheyWait-DanKeen.mp3?v=1854335106030116470",
+    "cinematic-pads":"originals-cinematic-pads-aurora-lucie-treacher.mp3?v=116474987957820132",
+    "cinematic-frozen-strings":"originals-cinematic-frozen-strings-expanding-horizons-dan-keen.mp3?v=15636470917744339275",
+    "wurli":"TrailerMusic-DanKeen.mp3?v=2951913980002439406",
+    "firewood-piano":"originals-firewood-piano-high-plains-homay-schmitz.mp3?v=4346081130010916416",
+    "mrs-mills-piano":"originals-mrs-mills-piano-staying-a-while-homay-schmitz.mp3?v=7810646457722054800",
+    "jangle-box-piano":"originals-jangle-box-piano.mp3?v=18059401182071768770",
+    "rare-flutes":"RareFlutesTrailerMusic.mp3?v=555852387564067124",
+    "cimbalom":"originals-cimbalom-through-the-lens-homay-schmitz.mp3?v=3255388352236374733",
+    "drumline":"originals-drumline-initiation-homay-schmitz.mp3?v=16409756087885305530",
+    "abe-laboriel-jr-drums":"1645629416-HRDDB.mp3?v=11722228604244954106",
+    "media-toolkit":"originals-media-toolkit-on-the-move-dan-keen.mp3?v=10441923063084493453"
+  };
+  const srcFor = slug => AUDIO[slug] ? CDN + AUDIO[slug] : null;
+
+  /* hero signature chips */
+  const SIGS = [0, 1, 3]; // Cinematic Soft Piano, Felt Piano, Epic Strings
+  document.getElementById("heroChips").innerHTML = SIGS.map(i =>
+    `<button class="chip" type="button" data-i="${i}"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>${LIVE[i][1]}</button>`).join("");
+
+  /* sticky mini-player */
+  const mini = document.createElement("div");
+  mini.className = "mini"; mini.setAttribute("role","region"); mini.setAttribute("aria-label","Audio preview");
+  mini.innerHTML =
+    `<div class="mini__in">
+      <img class="mini__art" id="mArt" alt="" width="46" height="46">
+      <div class="mini__meta"><div class="mini__name" id="mName"></div><div class="mini__sub" id="mSub"></div></div>
+      <button class="mini__btn mini__prev" id="mPrev" type="button" aria-label="Previous title"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 6h2v12H7zm3 6 9 6V6z"/></svg></button>
+      <button class="mini__btn mini__play" id="mPlay" type="button" aria-label="Play or pause">
+        <svg class="play-ic" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="pause-ic" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+      </button>
+      <button class="mini__btn mini__next" id="mNext" type="button" aria-label="Next title"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 6h2v12h-2zM5 18l9-6-9-6z"/></svg></button>
+      <div class="mini__bar" id="mBar" role="slider" aria-label="Seek"><span class="mini__fill" id="mFill"></span></div>
+      <span class="mini__time" id="mTime">0:00</span>
+      <button class="mini__btn mini__close" id="mClose" type="button" aria-label="Close player"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>`;
+  document.body.appendChild(mini);
+  const mArt = mini.querySelector("#mArt"), mName = mini.querySelector("#mName"), mSub = mini.querySelector("#mSub"),
+        mFill = mini.querySelector("#mFill"), mTime = mini.querySelector("#mTime"), mBar = mini.querySelector("#mBar");
+  const heroBtn = document.getElementById("heroPlay");
+
+  const audio = new Audio(); audio.preload = "none";
+  let cur = -1, playing = false;
+  const fmt = s => (!isFinite(s) ? "0:00" : Math.floor(s/60) + ":" + String(Math.floor(s%60)).padStart(2,"0"));
+
+  function reflect(){
+    document.querySelectorAll(".tile.is-playing").forEach(t => t.classList.remove("is-playing"));
+    const btn = document.querySelector(`.tile__play[data-i="${cur}"]`);
+    if (btn && playing) btn.closest(".tile").classList.add("is-playing");
+    mini.classList.toggle("is-playing", playing);
+    heroBtn.classList.toggle("is-playing", playing);
+    document.querySelectorAll(".chip").forEach(c => c.classList.toggle("is-active", playing && +c.dataset.i === cur));
+  }
+  function load(i){
+    cur = i; const [slug,name,cat,ext] = LIVE[i];
+    audio.src = srcFor(slug);
+    mArt.src = `assets/covers/${slug}.${ext}`; mArt.alt = name;
+    mName.textContent = name; mSub.textContent = cat + " · Originals";
+    mini.classList.add("is-open");
+  }
+  function play(i){ if (i !== undefined && i !== cur) load(i); audio.play().catch(()=>{}); }
+  function toggle(){ if (cur === -1){ play(SIGS[0]); return; } playing ? audio.pause() : audio.play().catch(()=>{}); }
+
+  audio.addEventListener("play",  ()=>{ playing = true;  reflect(); });
+  audio.addEventListener("pause", ()=>{ playing = false; reflect(); });
+  audio.addEventListener("ended", ()=> play((cur + 1) % LIVE.length));
+  audio.addEventListener("timeupdate", ()=>{
+    const d = audio.duration || 0;
+    mFill.style.width = (d ? audio.currentTime / d * 100 : 0) + "%";
+    mTime.textContent = fmt(audio.currentTime);
   });
+
+  document.getElementById("titles").addEventListener("click", e=>{
+    const b = e.target.closest(".tile__play"); if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    const i = +b.dataset.i; (i === cur) ? toggle() : play(i);
+  });
+  document.getElementById("heroChips").addEventListener("click", e=>{
+    const b = e.target.closest(".chip"); if (!b) return;
+    const i = +b.dataset.i; (i === cur) ? toggle() : play(i);
+  });
+  heroBtn.addEventListener("click", toggle);
+  mini.querySelector("#mPlay").addEventListener("click", toggle);
+  mini.querySelector("#mNext").addEventListener("click", ()=> play((cur + 1) % LIVE.length));
+  mini.querySelector("#mPrev").addEventListener("click", ()=> play((cur - 1 + LIVE.length) % LIVE.length));
+  mini.querySelector("#mClose").addEventListener("click", ()=>{ audio.pause(); mini.classList.remove("is-open"); });
+  mBar.addEventListener("click", e=>{ const r = mBar.getBoundingClientRect(); if (audio.duration) audio.currentTime = (e.clientX - r.left) / r.width * audio.duration; });
 
   /* sticky nav state */
   const nav = document.getElementById("nav");
