@@ -385,7 +385,9 @@
       if (d.t.heading) { var chip = el("div"); chip.className = "sfa-tt-chip"; chip.textContent = d.t.short; box.appendChild(chip); }
       overlay.appendChild(box); d.box = box;
       d._enter = function () { setActive(d); };
-      d._leave = function () { if (activeD === d) setActive(null); };
+      // Latch: keep the row + box highlight after roll-off (until another element
+      // is hovered). Only hide the floating tip, which can't track scroll.
+      d._leave = function () { hideTip(); };
       d.el.addEventListener("mouseenter", d._enter);
       d.el.addEventListener("mouseleave", d._leave);
     });
@@ -431,9 +433,11 @@
   }
   function hideTip() { if (tip) tip.style.display = "none"; }
 
-  // element hover -> highlight its rows. Single-active: always clear first, so a
-  // nested/outer element's highlight never lingers (mouseleave doesn't fire on a
-  // parent when you move onto its child, so per-element toggling would stick).
+  // element hover -> highlight its rows. Single-active + latching: each hover
+  // clears the previous active element first, then highlights the new one; the
+  // highlight persists after roll-off until another element is hovered. Clearing
+  // on enter (not leave) also avoids the nested-element problem (mouseleave does
+  // not fire on a parent when you move onto its child).
   var activeD = null;
   function clearActive() {
     if (overlay) { var hot = overlay.querySelectorAll(".sfa-tt-box.hot"); for (var i = 0; i < hot.length; i++) hot[i].classList.remove("hot"); }
