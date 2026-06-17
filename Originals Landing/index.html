@@ -9,7 +9,7 @@
 
 <style>
   /* ===========================================================
-     Inter — self-hosted, Splice-approximating geometric sans.
+     Inter, self-hosted Splice-approximating geometric sans.
      (Spitfire GT fonts deliberately NOT used: this is a Splice page.)
      =========================================================== */
   @font-face{font-family:Inter;font-weight:400;font-display:swap;src:url("assets/fonts/inter-400.woff2") format("woff2")}
@@ -74,7 +74,6 @@
   h2{font-size:clamp(30px,4.6vw,52px);letter-spacing:-.025em}
   h3{font-size:clamp(20px,2.4vw,26px);letter-spacing:-.02em;font-weight:700}
   .lede{color:var(--muted);font-size:clamp(16px,1.5vw,19px);font-weight:400;max-width:60ch}
-  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 
   /* ---------- buttons ---------- */
   .btn{
@@ -176,16 +175,15 @@
      VALUE BEATS
      =========================================================== */
   .beats{padding:clamp(56px,7vw,90px) 0}
-  .beats__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:44px}
-  .beat{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r-md);padding:26px 24px 28px;
-    transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s}
-  .beat:hover{transform:translateY(-4px);border-color:#2f2f3a}
-  .beat__ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:var(--grad-soft);border:1px solid var(--line);margin-bottom:18px}
-  .beat__ic svg{width:21px;height:21px;color:var(--pink-ink)}
-  .beat h3{margin-bottom:9px}
-  .beat p{color:var(--muted);font-size:14.5px}
-  @media(max-width:880px){.beats__grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:480px){.beats__grid{grid-template-columns:1fr}}
+  .beats__list{margin-top:44px;border-top:1px solid var(--line)}
+  .vbeat{display:grid;grid-template-columns:clamp(58px,8vw,108px) 1fr;gap:clamp(16px,3vw,44px);
+    align-items:baseline;padding:clamp(22px,3vw,34px) 0;border-bottom:1px solid var(--line)}
+  .vbeat__n{font-size:clamp(32px,4.2vw,54px);font-weight:800;line-height:1;letter-spacing:-.03em;
+    color:var(--pink-ink);font-variant-numeric:tabular-nums;opacity:.92}
+  .vbeat__c{max-width:62ch}
+  .vbeat h3{font-size:clamp(20px,2.4vw,28px);margin-bottom:8px}
+  .vbeat p{color:var(--muted);font-size:clamp(14.5px,1.4vw,16px)}
+  @media(max-width:560px){.vbeat{grid-template-columns:1fr;gap:4px}.vbeat__n{font-size:30px}}
 
   /* ===========================================================
      SECTION HEADER (shared)
@@ -246,7 +244,7 @@
   .math__was::after{content:"";position:absolute;left:-6px;right:-6px;top:52%;height:4px;background:var(--pink);border-radius:2px;transform:rotate(-8deg)}
   .math__arrow{color:var(--pink-ink);flex:none}
   .math__arrow svg{width:38px;height:38px}
-  .math__now{font-size:clamp(46px,8vw,86px);font-weight:900;letter-spacing:-.04em}
+  .math__now{font-size:clamp(46px,8vw,86px);font-weight:900;letter-spacing:-.04em;color:var(--pink-ink)}
   .math__now .mo{font-size:.32em;font-weight:700;color:var(--muted);letter-spacing:-.01em}
   .math__sub{text-align:center;color:var(--muted);margin-top:26px;font-size:15px}
 
@@ -276,24 +274,24 @@
   .demo__cat{font-size:11.5px;color:var(--muted)}
   .demo__wave{margin-left:auto;display:flex;align-items:center;gap:2px;height:24px}
   .demo__wave i{width:2px;border-radius:2px;background:linear-gradient(180deg,var(--pink-ink),var(--violet));opacity:.55}
-  .quote{margin-top:34px;border-left:2px solid var(--pink);padding:6px 0 6px 24px;max-width:64ch}
-  .quote p{font-size:clamp(18px,2.2vw,24px);font-weight:600;color:#fff;letter-spacing:-.01em;line-height:1.35}
-  .quote cite{display:block;margin-top:12px;color:var(--muted);font-size:14px;font-style:normal}
+  .quote{margin-top:40px;max-width:64ch;position:relative}
+  .quote__mark{display:block;font-size:clamp(48px,7vw,76px);line-height:.5;color:var(--pink-ink);font-weight:800;margin-bottom:18px}
+  .quote p{font-size:clamp(19px,2.4vw,26px);font-weight:600;color:#fff;letter-spacing:-.012em;line-height:1.34}
+  .quote cite{display:block;margin-top:14px;color:var(--muted);font-size:14px;font-style:normal}
   @media(max-width:820px){.proof__grid{grid-template-columns:1fr}}
 
   /* ===========================================================
      PLATFORM BAND (more than originals)
      =========================================================== */
   .platform{padding:clamp(56px,7vw,90px) 0;background:var(--bg-2);border-block:1px solid var(--line-soft)}
-  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:42px}
-  .feat{padding:24px 22px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line-soft);transition:border-color .3s,transform .3s}
-  .feat:hover{border-color:#2f2f3a;transform:translateY(-3px)}
-  .feat__ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid var(--line);margin-bottom:15px;color:var(--pink-ink)}
-  .feat__ic svg{width:19px;height:19px}
-  .feat h3{font-size:17px;margin-bottom:7px}
-  .feat p{color:var(--muted);font-size:14px}
-  @media(max-width:760px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:460px){.feat-grid{grid-template-columns:1fr}}
+  .feat-list{margin-top:42px;display:grid;grid-template-columns:repeat(2,1fr);column-gap:clamp(28px,5vw,72px);row-gap:0}
+  .feat{padding:22px 0;border-top:1px solid var(--line)}
+  .feat__h{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .feat__ic{color:var(--pink-ink);display:grid;place-items:center;flex:none}
+  .feat__ic svg{width:20px;height:20px}
+  .feat h3{font-size:17px}
+  .feat p{color:var(--muted);font-size:14px;max-width:46ch}
+  @media(max-width:620px){.feat-list{grid-template-columns:1fr}}
 
   /* ===========================================================
      CRAFT
@@ -396,9 +394,9 @@
     <div class="wrap">
       <span class="hero__eyebrow eyebrow"><span class="dot"></span>Spitfire Originals, now on Splice INSTRUMENT</span>
       <h1>All of Originals.<br>One subscription.</h1>
-      <p class="lede">The complete, full-fidelity Spitfire Originals collection — <b>every title, fully unlocked</b> — on INSTRUMENT for <b>£12.99/month</b>. Around £600+ of Spitfire Audio sounds. One price.</p>
+      <p class="lede">The complete, full-fidelity Spitfire Originals collection: <b>every title, fully unlocked</b>, on INSTRUMENT for <b>£12.99/month</b>. Around £600+ of Spitfire Audio sounds. One price.</p>
       <div class="hero__cta">
-        <a class="btn btn--primary btn--lg" href="https://splice.com/plans/checkout?products=1064fbac-424b-4a68-8eab-981ad9cc2aef">Subscribe <span class="price">— £12.99/month</span></a>
+        <a class="btn btn--primary btn--lg" href="https://splice.com/plans/checkout?products=1064fbac-424b-4a68-8eab-981ad9cc2aef">Subscribe <span class="price">· £12.99/month</span></a>
         <span class="hero__note">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
           Instant access · cancel anytime
@@ -407,7 +405,7 @@
     </div>
     <div class="marquee" aria-hidden="true"><div class="marquee__row" id="marquee"></div></div>
     <div class="wrap trust">
-      <span><b>From Spitfire Audio</b> — the studio behind Abbey Road One, BBC Symphony Orchestra & the Originals line</span>
+      <span><b>From Spitfire Audio</b>, the studio behind Abbey Road One, BBC Symphony Orchestra and the Originals line</span>
     </div>
   </header>
 
@@ -418,27 +416,11 @@
         <span class="eyebrow">Why subscribe</span>
         <h2>The whole world of Originals, working for you.</h2>
       </div>
-      <div class="beats__grid">
-        <div class="beat reveal">
-          <div class="beat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
-          <h3>Breadth</h3>
-          <p>Every Originals title in one place — pianos, strings, brass, choirs, percussion and more. The whole collection, not a sampler.</p>
-        </div>
-        <div class="beat reveal">
-          <div class="beat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-          <h3>Value</h3>
-          <p>Around £600+ of Spitfire Audio sounds, unlocked for £12.99/month. The easiest way to own the Originals sound.</p>
-        </div>
-        <div class="beat reveal">
-          <div class="beat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 2 2.4 7.2H22l-6 4.6 2.3 7.2L12 16.8 5.7 21l2.3-7.2-6-4.6h7.6z"/></svg></div>
-          <h3>Quality</h3>
-          <p>Full-fidelity — not lite. Multiple mic signals, complete preset lists, refreshed UI and artwork. The real instruments.</p>
-        </div>
-        <div class="beat reveal">
-          <div class="beat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></div>
-          <h3>Ease</h3>
-          <p>One subscription, everything unlocked, instant access. No packs to chase. Open INSTRUMENT and start writing in minutes.</p>
-        </div>
+      <div class="beats__list">
+        <div class="vbeat reveal"><span class="vbeat__n">01</span><div class="vbeat__c"><h3>Breadth</h3><p>Every Originals title in one place: pianos, strings, brass, choirs, percussion and more. The whole collection, not a sampler.</p></div></div>
+        <div class="vbeat reveal"><span class="vbeat__n">02</span><div class="vbeat__c"><h3>Value</h3><p>Around £600+ of Spitfire Audio sounds, unlocked for £12.99/month. The easiest way to own the Originals sound.</p></div></div>
+        <div class="vbeat reveal"><span class="vbeat__n">03</span><div class="vbeat__c"><h3>Quality</h3><p>Full fidelity, not lite. Multiple mic signals, complete preset lists, refreshed UI and artwork. The real instruments.</p></div></div>
+        <div class="vbeat reveal"><span class="vbeat__n">04</span><div class="vbeat__c"><h3>Ease</h3><p>One subscription, everything unlocked, instant access. No packs to chase. Open INSTRUMENT and start writing in minutes.</p></div></div>
       </div>
     </div>
   </section>
@@ -450,7 +432,7 @@
         <div class="sec-head reveal">
           <span class="eyebrow">The collection</span>
           <h2>Every Originals title. Unlocked.</h2>
-          <p class="lede">Recognisable, record-ready instruments used on countless releases — now all in one subscription.</p>
+          <p class="lede">Recognisable, record-ready instruments used on countless releases, now all in one subscription.</p>
         </div>
         <span class="pill reveal"><b id="titleCount">22</b>&nbsp;titles &middot; <b>4</b> brand new</span>
       </div>
@@ -470,10 +452,10 @@
           <span class="math__arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
           <div class="math__col">
             <div class="k">On INSTRUMENT</div>
-            <div class="math__now grad-text">£12.99<span class="mo">/mo</span></div>
+            <div class="math__now">£12.99<span class="mo">/mo</span></div>
           </div>
         </div>
-        <p class="math__sub">Every title, every mic, every preset — for less than the price of a single perpetual instrument.</p>
+        <p class="math__sub">Every title, every mic, every preset, for less than the price of a single perpetual instrument.</p>
       </div>
     </div>
   </section>
@@ -488,13 +470,14 @@
       <div class="proof__grid">
         <div class="video reveal" role="button" aria-label="Play the Originals walkthrough">
           <div class="video__play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-          <span class="video__cap">Originals on INSTRUMENT — walkthrough</span>
+          <span class="video__cap">Originals on INSTRUMENT: walkthrough</span>
         </div>
         <div class="demos reveal" id="demos"></div>
       </div>
       <blockquote class="quote reveal">
-        <p>“Spitfire's Originals gave a generation of writers their first taste of cinematic strings and felt piano. Now the whole shelf opens with one subscription.”</p>
-        <cite>— The Spitfire Audio sound, on Splice INSTRUMENT</cite>
+        <span class="quote__mark" aria-hidden="true">“</span>
+        <p>Spitfire's Originals gave a generation of writers their first taste of cinematic strings and felt piano. Now the whole shelf opens with one subscription.</p>
+        <cite>The Spitfire Audio sound, on Splice INSTRUMENT</cite>
       </blockquote>
     </div>
   </section>
@@ -505,15 +488,15 @@
       <div class="sec-head reveal">
         <span class="eyebrow">More than Originals</span>
         <h2>A whole instrument, not just a library.</h2>
-        <p class="lede">Your subscription is the full INSTRUMENT plugin — built to play, browse and shape sounds right inside your DAW.</p>
+        <p class="lede">Your subscription is the full INSTRUMENT plugin, built to play, browse and shape sounds right inside your DAW.</p>
       </div>
-      <div class="feat-grid">
-        <div class="feat reveal"><div class="feat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div><h3>Discover &amp; Search</h3><p>Find the right sound fast across the whole catalogue, by name, mood or instrument.</p></div>
-        <div class="feat reveal"><div class="feat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M5 8v8M19 8v8"/></svg></div><h3>Dynamics control</h3><p>Ride expression in real time — from a whisper to full force on a single slider.</p></div>
-        <div class="feat reveal"><div class="feat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="7" r="2.4"/><circle cx="14" cy="17" r="2.4"/><path d="M8.4 12H22M3 7h12.6M3 17h8.6"/></svg></div><h3>Parameter control</h3><p>Shape tone, mics and character with hands-on controls made for performance.</p></div>
-        <div class="feat reveal"><div class="feat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4m0 12-4-4m4 4 4-4M4 18v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"/></svg></div><h3>Free drops</h3><p>New free presets land regularly — the catalogue keeps growing while you subscribe.</p></div>
-        <div class="feat reveal"><div class="feat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div><h3>Works in your DAW</h3><p>AU, VST3, AAX or standalone. Drop it into any session and play.</p></div>
-        <div class="feat reveal"><div class="feat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M12 3v9h9"/></svg></div><h3>Your library</h3><p>Everything you unlock, organised and ready — one home for all your sounds.</p></div>
+      <div class="feat-list">
+        <div class="feat reveal"><div class="feat__h"><span class="feat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span><h3>Discover &amp; Search</h3></div><p>Find the right sound fast across the whole catalogue, by name, mood or instrument.</p></div>
+        <div class="feat reveal"><div class="feat__h"><span class="feat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M5 8v8M19 8v8"/></svg></span><h3>Dynamics control</h3></div><p>Ride expression in real time, from a whisper to full force on a single slider.</p></div>
+        <div class="feat reveal"><div class="feat__h"><span class="feat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="12" r="2.4"/><circle cx="18" cy="7" r="2.4"/><circle cx="14" cy="17" r="2.4"/><path d="M8.4 12H22M3 7h12.6M3 17h8.6"/></svg></span><h3>Parameter control</h3></div><p>Shape tone, mics and character with hands-on controls made for performance.</p></div>
+        <div class="feat reveal"><div class="feat__h"><span class="feat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4m0 12-4-4m4 4 4-4M4 18v1a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-1"/></svg></span><h3>Free drops</h3></div><p>New free presets land regularly; the catalogue keeps growing while you subscribe.</p></div>
+        <div class="feat reveal"><div class="feat__h"><span class="feat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></span><h3>Works in your DAW</h3></div><p>AU, VST3, AAX or standalone. Drop it into any session and play.</p></div>
+        <div class="feat reveal"><div class="feat__h"><span class="feat__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M12 3v9h9"/></svg></span><h3>Your library</h3></div><p>Everything you unlock, organised and ready: one home for all your sounds.</p></div>
       </div>
     </div>
   </section>
@@ -525,7 +508,7 @@
         <div class="craft__inner">
           <span class="eyebrow">Craft</span>
           <h2>Reshape your sounds into something only yours.</h2>
-          <p>Take a sample and play it in nearly infinite ways — re-voiced, re-pitched, rebuilt into a brand-new playable instrument. The new way to use the catalogue you subscribe for.</p>
+          <p>Take a sample and play it in nearly infinite ways: re-voiced, re-pitched, rebuilt into a brand-new playable instrument. The new way to use the catalogue you subscribe for.</p>
           <span class="craft__tag"><span class="dot"></span>For the art makers, not the AI takers.</span>
         </div>
       </div>
@@ -547,11 +530,11 @@
           <div class="plan__intro is-blank">All of Originals, fully unlocked</div>
           <ul class="plan__list">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>The complete Originals collection</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Full fidelity — all mics &amp; presets</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Full fidelity, all mics and presets</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>The full INSTRUMENT plugin + free drops</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Cancel anytime</li>
           </ul>
-          <a class="btn btn--primary" href="https://splice.com/plans/checkout?products=1064fbac-424b-4a68-8eab-981ad9cc2aef">Subscribe — £12.99/month</a>
+          <a class="btn btn--primary" href="https://splice.com/plans/checkout?products=1064fbac-424b-4a68-8eab-981ad9cc2aef">Subscribe · £12.99/month</a>
         </div>
         <div class="plan reveal">
           <div class="plan__name">Creator</div>
@@ -560,10 +543,10 @@
           <ul class="plan__list">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Everything in INSTRUMENT</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>200 Splice Sounds credits / month</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Craft — reshape your own sounds</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Craft: reshape your own sounds</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Cancel anytime</li>
           </ul>
-          <a class="btn btn--ghost" href="https://splice.com/instrument/plans">Subscribe — £19.99/month</a>
+          <a class="btn btn--ghost" href="https://splice.com/instrument/plans">Subscribe · £19.99/month</a>
         </div>
       </div>
     </div>
@@ -574,7 +557,7 @@
     <div class="wrap">
       <h2>All of Originals. One subscription.</h2>
       <p>Around £600+ of Spitfire Audio sounds, fully unlocked, for £12.99/month.</p>
-      <a class="btn btn--primary btn--lg" href="https://splice.com/plans/checkout?products=1064fbac-424b-4a68-8eab-981ad9cc2aef">Subscribe <span class="price">— £12.99/month</span></a>
+      <a class="btn btn--primary btn--lg" href="https://splice.com/plans/checkout?products=1064fbac-424b-4a68-8eab-981ad9cc2aef">Subscribe <span class="price">· £12.99/month</span></a>
       <div class="close__note">Instant access · cancel anytime</div>
     </div>
   </section>
@@ -626,9 +609,9 @@
       </a>`);
   });
   LIVE.forEach(([slug,name,cat,ext])=>{
-    /* real covers already carry their title in the artwork — let them stand clean */
+    /* real covers already carry their title in the artwork, so let them stand clean */
     grid.insertAdjacentHTML("beforeend",
-      `<a class="tile" href="https://splice.com/plans/checkout?products=1064fbac-424b-4a68-8eab-981ad9cc2aef" aria-label="${name} — ${cat}" title="${name}">
+      `<a class="tile" href="https://splice.com/plans/checkout?products=1064fbac-424b-4a68-8eab-981ad9cc2aef" aria-label="${name}, ${cat}" title="${name}">
         <img src="assets/covers/${slug}.${ext}" alt="${name}" loading="lazy" width="800" height="800">
       </a>`);
   });
