@@ -125,8 +125,8 @@
       "#sfa-tt-legend span{display:inline-flex;align-items:center;gap:5px}",
       "#sfa-tt-legend i{width:9px;height:9px;border-radius:2px}",
       ".sfa-tt-rowwrap.hi{background:rgba(255,48,56,.14)}",
-      "#sfa-tt-overlay{position:fixed;inset:0;z-index:2147482000;pointer-events:none}",
-      ".sfa-tt-box{position:fixed;pointer-events:none;outline:1px dashed rgba(255,255,255,.3);outline-offset:1px}",
+      "#sfa-tt-overlay{position:absolute;top:0;left:0;z-index:2147482000;pointer-events:none}",
+      ".sfa-tt-box{position:absolute;pointer-events:none;outline:1px dashed rgba(255,255,255,.3);outline-offset:1px}",
       ".sfa-tt-box.dir-neutral{outline-color:rgba(122,162,255,.65)}",
       ".sfa-tt-box.dir-expressive{outline-color:rgba(255,93,143,.75)}",
       ".sfa-tt-box.dir-cinematic{outline-color:rgba(255,194,75,.8)}",
@@ -406,11 +406,14 @@
     repoScheduled = false;
     if (!overlay) return;
     var vw = window.innerWidth, vh = window.innerHeight;
+    var sx = window.pageXOffset, sy = window.pageYOffset;
     var rects = detected.map(function (d) { return d.el.getBoundingClientRect(); }); // batch reads first
     detected.forEach(function (d, i) {                                               // then batch writes
       var r = rects[i], b = d.box.style;
       if (!r.width || !r.height || r.bottom < 0 || r.top > vh || r.right < 0 || r.left > vw) { b.display = "none"; return; }
-      b.display = "block"; b.left = r.left + "px"; b.top = r.top + "px"; b.width = r.width + "px"; b.height = r.height + "px";
+      // document coords (rect + scroll) so absolute boxes scroll natively with the
+      // page; no per-frame lag chasing native scroll.
+      b.display = "block"; b.left = (r.left + sx) + "px"; b.top = (r.top + sy) + "px"; b.width = r.width + "px"; b.height = r.height + "px";
     });
   }
   function scheduleReposition() { if (repoScheduled || !overlay) return; repoScheduled = true; requestAnimationFrame(reposition); }
