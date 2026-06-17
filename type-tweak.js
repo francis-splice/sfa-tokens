@@ -381,7 +381,7 @@
       if (!node || !node.closest) continue;
       if (node.closest("#sfa-type-tweak")) { m = null; break; } // over the panel: ignore
       var c = node.closest(TOKEN_SEL);
-      if (c) { m = c; break; }
+      if (c && c.textContent && c.textContent.trim()) { m = c; break; }
     }
     if (!m) { hideTip(); return; }
     if (activeD && activeD.el === m) return;
@@ -399,6 +399,9 @@
         var node = nodes[i];
         if (seen.indexOf(node) !== -1) continue;     // first (composite) match wins
         if (node.closest("#sfa-type-tweak")) continue; // skip our own UI
+        if (!node.textContent || !node.textContent.trim()) continue; // skip empty cells (no visible text)
+        var cs = getComputedStyle(node);
+        if (cs.visibility === "hidden" || cs.display === "none" || parseFloat(cs.opacity) === 0) continue; // skip invisible (e.g. hidden carousel cards)
         seen.push(node);
         detected.push({ el: node, t: t });
       }
