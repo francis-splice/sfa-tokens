@@ -113,7 +113,7 @@
 
     
 
-<title>
+<title>[Prototype] 
   Mervyn Warren Choir – Expressive Choir Virtual Instrument | Spitfire Audio
 </title>
 
@@ -2507,7 +2507,37 @@ first.parentNode.insertBefore(script, first);
 ></script>
 <link rel="stylesheet" href="tokens.css" id="token-playground">
 </head>
-  <body id="wrapper" class="page-type-product template-product theme-light"><link href="https://www.spitfireaudio.com/cdn/shop/t/14/assets/snippet-cart-drawer.css?v=24840520592616298931759118264" rel="stylesheet" type="text/css" media="all" />
+  <body id="wrapper" class="page-type-product template-product theme-light">
+<style id="sfa-proto-bar-style">
+  html { margin-top: 38px !important; }
+  #shopify-section-main-header { top: 38px !important; }
+  .section-layout-product-navigation { top: 110px !important; }
+  #sfa-proto-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 2147483647;
+    height: 38px; box-sizing: border-box;
+    display: flex; align-items: center; gap: 10px;
+    padding: 0 clamp(14px, 4vw, 26px);
+    background: #070709; border-bottom: 1px solid #1f1f25;
+    font-family: "GT Flaire Trial VF", system-ui, -apple-system, sans-serif;
+    font-size: 12px; color: #74747d; line-height: 1;
+    white-space: nowrap; overflow: hidden;
+  }
+  #sfa-proto-bar .pb-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; background: #FF3038; box-shadow: 0 0 8px #FF3038; }
+  #sfa-proto-bar .pb-label { font-weight: 700; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #fff; }
+  #sfa-proto-bar .pb-desc { color: #b6b6bd; }
+  #sfa-proto-bar .pb-spacer { flex: 1; }
+  #sfa-proto-bar .pb-link { color: #C6C6CB; text-decoration: none; border-bottom: 1px solid #2a2a31; }
+  #sfa-proto-bar .pb-link:hover { color: #FF3038; border-color: #FF3038; }
+  @media (max-width: 640px) { #sfa-proto-bar .pb-desc { display: none; } }
+</style>
+<div id="sfa-proto-bar" role="note" aria-label="Prototype notice">
+  <span class="pb-dot" aria-hidden="true"></span>
+  <span class="pb-label">Prototype</span>
+  <span class="pb-desc">Internal design-token study &middot; not indexed &middot; not for distribution</span>
+  <span class="pb-spacer"></span>
+  <a class="pb-link" href="../index.html">&larr; Studies hub</a>
+</div>
+<link href="https://www.spitfireaudio.com/cdn/shop/t/14/assets/snippet-cart-drawer.css?v=24840520592616298931759118264" rel="stylesheet" type="text/css" media="all" />
   <cart-drawer class="cart-drawer">
     <update-spinner data-popup-spinner>
       <div class="spinner"></div>
