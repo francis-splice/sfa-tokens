@@ -369,9 +369,21 @@
   // Robust to child text (e.g. span inside .audio-name), overflowing glyphs, and
   // elements rendered after the initial scan (lazy audio demos).
   function onOver(e) {
-    var t = e.target;
-    var m = t && t.closest ? t.closest(TOKEN_SEL) : null;
-    if (!m || (m.closest && m.closest("#sfa-type-tweak"))) { hideTip(); return; }
+    // Resolve the token element under the cursor with elementsFromPoint so we can
+    // see THROUGH overlay elements (e.g. the audio player's stretched-link::after,
+    // which covers the track name and would otherwise swallow the hover; the track
+    // name is its sibling, so closest() from the overlay can't reach it).
+    var m = null;
+    var stack = (document.elementsFromPoint && e.clientX != null)
+      ? document.elementsFromPoint(e.clientX, e.clientY) : [e.target];
+    for (var i = 0; i < stack.length; i++) {
+      var node = stack[i];
+      if (!node || !node.closest) continue;
+      if (node.closest("#sfa-type-tweak")) { m = null; break; } // over the panel: ignore
+      var c = node.closest(TOKEN_SEL);
+      if (c) { m = c; break; }
+    }
+    if (!m) { hideTip(); return; }
     if (activeD && activeD.el === m) return;
     var d = (byEl && byEl.get(m)) || { el: m, t: tokenFor(m), box: null };
     if (!d.t) return;
