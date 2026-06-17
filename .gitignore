@@ -6,6 +6,8 @@
 
 # Not needed by the published hub (Originals link to the live Spitfire site).
 # These stay on local disk; they are just not pushed / served.
+# Anchored to repo root so the landing page's own "Originals Landing/assets/fonts/"
+# (self-hosted Inter) is NOT excluded.
 Proxima Nova/
 Tenebra Original/
-fonts/
+/fonts/
