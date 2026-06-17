@@ -384,8 +384,8 @@
       var box = el("div"); box.className = "sfa-tt-box dir-" + d.t.dir;
       if (d.t.heading) { var chip = el("div"); chip.className = "sfa-tt-chip"; chip.textContent = d.t.short; box.appendChild(chip); }
       overlay.appendChild(box); d.box = box;
-      d._enter = function () { showTip(d); rowHi(d, true); box.classList.add("hot"); };
-      d._leave = function () { hideTip(); rowHi(d, false); box.classList.remove("hot"); };
+      d._enter = function () { setActive(d); };
+      d._leave = function () { if (activeD === d) setActive(null); };
       d.el.addEventListener("mouseenter", d._enter);
       d.el.addEventListener("mouseleave", d._leave);
     });
@@ -393,11 +393,11 @@
   }
 
   function teardownOverlay() {
+    clearActive();
     detected.forEach(function (d) {
       if (d._enter) { d.el.removeEventListener("mouseenter", d._enter); d.el.removeEventListener("mouseleave", d._leave); }
     });
     if (overlay) { overlay.remove(); overlay = null; }
-    hideTip();
   }
 
   function reposition() {
@@ -431,14 +431,29 @@
   }
   function hideTip() { if (tip) tip.style.display = "none"; }
 
-  // element hover -> highlight its size + weight rows (and open their groups)
-  function rowHi(d, on) {
+  // element hover -> highlight its rows. Single-active: always clear first, so a
+  // nested/outer element's highlight never lingers (mouseleave doesn't fire on a
+  // parent when you move onto its child, so per-element toggling would stick).
+  var activeD = null;
+  function clearActive() {
+    if (overlay) { var hot = overlay.querySelectorAll(".sfa-tt-box.hot"); for (var i = 0; i < hot.length; i++) hot[i].classList.remove("hot"); }
+    var hi = document.querySelectorAll("#sfa-type-tweak .sfa-tt-rowwrap.hi");
+    for (var j = 0; j < hi.length; j++) hi[j].classList.remove("hi");
+    hideTip();
+    activeD = null;
+  }
+  function setActive(d) {
+    clearActive();
+    if (!d) return;
+    activeD = d;
+    if (d.box) d.box.classList.add("hot");
+    showTip(d);
     [d.t.sizeVar, d.t.weightVar].forEach(function (v) {
       var ref = els[v]; if (!ref || !ref.wrap) return;
-      ref.wrap.classList.toggle("hi", on);
-      if (on) { var det = ref.wrap.closest("details"); if (det && !det.open) det.open = true; }
+      ref.wrap.classList.add("hi");
+      var det = ref.wrap.closest("details"); if (det && !det.open) det.open = true;
     });
-    if (on) { var sref = els[d.t.sizeVar]; if (sref && sref.wrap) sref.wrap.scrollIntoView({ block: "nearest" }); }
+    var sref = els[d.t.sizeVar]; if (sref && sref.wrap) sref.wrap.scrollIntoView({ block: "nearest" });
   }
   // panel row hover -> flash the elements that use that token
   function highlightByVar(cssVar, on) {
