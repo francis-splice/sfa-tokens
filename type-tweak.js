@@ -120,7 +120,23 @@
       "#sfa-tt-foot button{flex:1;padding:9px 10px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid #2a2a31;background:#161620;color:#C6C6CB}",
       "#sfa-tt-foot .exp{background:#FF3038;border-color:#FF3038;color:#fff}",
       "#sfa-tt-foot button:hover{border-color:#FF3038}",
-      "#sfa-tt-err{padding:18px;font-size:12px;color:#ff8a8f}"
+      "#sfa-tt-err{padding:18px;font-size:12px;color:#ff8a8f}",
+      "#sfa-tt-labels{margin-left:auto;align-self:center;background:#161620;border:1px solid #2a2a31;color:#C6C6CB;font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:6px 10px;border-radius:999px;cursor:pointer}",
+      "#sfa-tt-labels.on{background:#FF3038;border-color:#FF3038;color:#fff}",
+      "#sfa-tt-labels:hover{border-color:#FF3038}",
+      ".sfa-tt-rowwrap.hi{background:rgba(255,48,56,.14)}",
+      "#sfa-tt-overlay{position:fixed;inset:0;z-index:2147482000;pointer-events:none}",
+      ".sfa-tt-box{position:fixed;pointer-events:none;outline:1px dashed rgba(255,255,255,.3);outline-offset:1px}",
+      ".sfa-tt-box.dir-neutral{outline-color:rgba(122,162,255,.65)}",
+      ".sfa-tt-box.dir-expressive{outline-color:rgba(255,93,143,.75)}",
+      ".sfa-tt-box.dir-cinematic{outline-color:rgba(255,194,75,.8)}",
+      ".sfa-tt-box.hot{outline-style:solid;outline-width:2px;background:rgba(255,255,255,.05)}",
+      ".sfa-tt-box.flash{outline-style:solid;outline-width:2px;background:rgba(255,48,56,.14)}",
+      ".sfa-tt-chip{position:absolute;left:0;top:-15px;font-weight:700;font-size:9px;line-height:1.4;letter-spacing:.06em;text-transform:uppercase;padding:1px 5px;border-radius:3px;white-space:nowrap;pointer-events:none}",
+      ".sfa-tt-box.dir-neutral .sfa-tt-chip{background:#7aa2ff;color:#06060a}",
+      ".sfa-tt-box.dir-expressive .sfa-tt-chip{background:#ff5d8f;color:#fff}",
+      ".sfa-tt-box.dir-cinematic .sfa-tt-chip{background:#ffc24b;color:#06060a}",
+      "#sfa-tt-tip{position:fixed;z-index:2147483100;pointer-events:none;background:#FF3038;color:#fff;font-weight:700;font-size:11px;line-height:1.5;padding:3px 8px;border-radius:5px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.55);display:none}"
     ].join("");
   }
 
@@ -166,6 +182,7 @@
       overrides[item.cssVar] = val;
       applyVar(item.cssVar, val);
       saveOverrides();
+      if (overlayOn) scheduleReposition();
     }
     range.addEventListener("input", function () { num.value = range.value; commit(+range.value); });
     num.addEventListener("input", function () { range.value = num.value; commit(+num.value); });
@@ -180,7 +197,9 @@
       range.value = d; num.value = d;
     });
 
-    els[item.cssVar] = { range: range, num: num, isSize: isSize, def: item.def };
+    els[item.cssVar] = { range: range, num: num, isSize: isSize, def: item.def, wrap: wrap };
+    wrap.addEventListener("mouseenter", function () { highlightByVar(item.cssVar, true); });
+    wrap.addEventListener("mouseleave", function () { highlightByVar(item.cssVar, false); });
     row.appendChild(label); row.appendChild(num); row.appendChild(rst);
     wrap.appendChild(range); wrap.appendChild(row);
     return wrap;
@@ -205,6 +224,11 @@
     var head = document.createElement("div");
     head.id = "sfa-tt-head";
     head.innerHTML = "<div><h2>Type tokens</h2><p>Live size &amp; weight. Tweaks persist; export when happy.</p></div>";
+    var lab = document.createElement("button");
+    lab.id = "sfa-tt-labels"; lab.textContent = "Labels";
+    lab.title = "Toggle token labels on the page";
+    lab.addEventListener("click", toggleLabels);
+    head.appendChild(lab);
     var close = document.createElement("button");
     close.id = "sfa-tt-close"; close.innerHTML = "&times;"; close.title = "Close";
     close.addEventListener("click", function () { root.classList.remove("open"); });
@@ -286,6 +310,142 @@
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
   }
+
+  // ---- token-label overlay --------------------------------------------------
+  function el(t) { return document.createElement(t); }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  // class -> token mapping. Composites listed first so they win over utility
+  // classes on the same element (matches the CSS cascade); first match per node.
+  function buildTokenMap() {
+    var m = [];
+    var dirWeight = { neutral: "neutral-medium", expressive: "expressive-light", cinematic: "cinematic-bold" };
+    var abbr = { neutral: "Neu", expressive: "Expr", cinematic: "Cin" };
+    var levels = { neutral: [0,1,2,3,4,5,6], expressive: [0,1,2,3,4,5,6], cinematic: [1,2,3,4,5,6,7] };
+    DIRECTIONS.forEach(function (dir) {
+      levels[dir].forEach(function (n) {
+        m.push({ sel: ".h" + n + "-" + dir, sizeVar: "--font-size-" + dir + "-" + n,
+          weightVar: "--font-weight-" + dirWeight[dir], label: cap(dir) + " · H" + n,
+          short: abbr[dir] + " H" + n, dir: dir, heading: true });
+      });
+    });
+    [["body-1","Body 1","neutral-regular"],["body-1-emphasis","Body 1 Emph","neutral-medium"],
+     ["body-2","Body 2","neutral-regular"],["body-2-emphasis","Body 2 Emph","neutral-medium"],
+     ["body-3","Body 3","neutral-regular"],["body-3-emphasis","Body 3 Emph","neutral-medium"]
+    ].forEach(function (b) {
+      m.push({ sel: "." + b[0], sizeVar: "--font-size-neutral-" + b[0], weightVar: "--font-weight-" + b[2],
+        label: "Neutral · " + b[1], short: "Neu " + b[1], dir: "neutral", heading: false });
+    });
+    m.push({ sel: ".control-label", sizeVar: "--font-size-cinematic-control-label",
+      weightVar: "--font-weight-cinematic-medium", label: "Cinematic · Control Label",
+      short: "Cin Ctrl", dir: "cinematic", heading: true });
+    [[".u-heading-xl","neutral-0","neutral-medium","Neutral · H0",true],
+     [".u-heading-lg","neutral-2","neutral-medium","Neutral · H2",true],
+     [".u-heading-sm","neutral-5","neutral-medium","Neutral · H5",true],
+     [".u-heading-xs","neutral-6","neutral-medium","Neutral · H6",true],
+     [".sub-text","neutral-body-3","neutral-regular","Neutral · Body 3",false],
+     [".audio-name","neutral-body-2-emphasis","neutral-medium","Neutral · Body 2 Emph",false],
+     [".c-rte","neutral-body-1","neutral-regular","Neutral · Body 1",false],
+     [".u-text-lg","neutral-body-1","neutral-regular","Neutral · Body 1",false],
+     [".u-text-sm","neutral-body-2","neutral-regular","Neutral · Body 2",false],
+     [".card-text","neutral-body-2","neutral-regular","Neutral · Body 2",false]
+    ].forEach(function (u) {
+      m.push({ sel: u[0], sizeVar: "--font-size-" + u[1], weightVar: "--font-weight-" + u[2],
+        label: u[3], short: u[3].replace("Neutral · ", "Neu "), dir: "neutral", heading: u[4] });
+    });
+    return m;
+  }
+  var TOKENMAP = buildTokenMap();
+
+  var overlayOn = false, overlay = null, tip = null, detected = [], repoScheduled = false;
+
+  function scan() {
+    detected = [];
+    var seen = [];
+    TOKENMAP.forEach(function (t) {
+      var nodes = document.querySelectorAll(t.sel);
+      for (var i = 0; i < nodes.length; i++) {
+        var node = nodes[i];
+        if (seen.indexOf(node) !== -1) continue;     // first (composite) match wins
+        if (node.closest("#sfa-type-tweak")) continue; // skip our own UI
+        seen.push(node);
+        detected.push({ el: node, t: t });
+      }
+    });
+  }
+
+  function buildOverlay() {
+    overlay = el("div"); overlay.id = "sfa-tt-overlay";
+    document.body.appendChild(overlay);
+    detected.forEach(function (d) {
+      var box = el("div"); box.className = "sfa-tt-box dir-" + d.t.dir;
+      if (d.t.heading) { var chip = el("div"); chip.className = "sfa-tt-chip"; chip.textContent = d.t.short; box.appendChild(chip); }
+      overlay.appendChild(box); d.box = box;
+      d._enter = function () { showTip(d); rowHi(d, true); box.classList.add("hot"); };
+      d._leave = function () { hideTip(); rowHi(d, false); box.classList.remove("hot"); };
+      d.el.addEventListener("mouseenter", d._enter);
+      d.el.addEventListener("mouseleave", d._leave);
+    });
+    reposition();
+  }
+
+  function teardownOverlay() {
+    detected.forEach(function (d) {
+      if (d._enter) { d.el.removeEventListener("mouseenter", d._enter); d.el.removeEventListener("mouseleave", d._leave); }
+    });
+    if (overlay) { overlay.remove(); overlay = null; }
+    hideTip();
+  }
+
+  function reposition() {
+    repoScheduled = false;
+    if (!overlay) return;
+    var vw = window.innerWidth, vh = window.innerHeight;
+    detected.forEach(function (d) {
+      var r = d.el.getBoundingClientRect();
+      if (!r.width || !r.height || r.bottom < 0 || r.top > vh || r.right < 0 || r.left > vw) { d.box.style.display = "none"; return; }
+      var b = d.box.style;
+      b.display = "block"; b.left = r.left + "px"; b.top = r.top + "px"; b.width = r.width + "px"; b.height = r.height + "px";
+    });
+  }
+  function scheduleReposition() { if (repoScheduled || !overlay) return; repoScheduled = true; requestAnimationFrame(reposition); }
+
+  function showTip(d) {
+    if (!tip) { tip = el("div"); tip.id = "sfa-tt-tip"; document.body.appendChild(tip); }
+    var cs = getComputedStyle(d.el);
+    tip.textContent = d.t.label + " · " + Math.round(parseFloat(cs.fontSize)) + "px · " + cs.fontWeight;
+    var r = d.el.getBoundingClientRect();
+    tip.style.display = "block";
+    var top = r.top - 24; if (top < 2) top = r.top + 2;
+    tip.style.left = Math.max(4, r.left) + "px"; tip.style.top = top + "px";
+  }
+  function hideTip() { if (tip) tip.style.display = "none"; }
+
+  // element hover -> highlight its size + weight rows (and open their groups)
+  function rowHi(d, on) {
+    [d.t.sizeVar, d.t.weightVar].forEach(function (v) {
+      var ref = els[v]; if (!ref || !ref.wrap) return;
+      ref.wrap.classList.toggle("hi", on);
+      if (on) { var det = ref.wrap.closest("details"); if (det && !det.open) det.open = true; }
+    });
+  }
+  // panel row hover -> flash the elements that use that token
+  function highlightByVar(cssVar, on) {
+    if (!overlay) return;
+    detected.forEach(function (d) {
+      if (d.t.sizeVar === cssVar || d.t.weightVar === cssVar) d.box.classList.toggle("flash", on);
+    });
+  }
+
+  function toggleLabels() {
+    overlayOn = !overlayOn;
+    var btn = document.getElementById("sfa-tt-labels");
+    if (btn) btn.classList.toggle("on", overlayOn);
+    if (overlayOn) { scan(); buildOverlay(); } else { teardownOverlay(); }
+  }
+
+  window.addEventListener("scroll", scheduleReposition, true);
+  window.addEventListener("resize", scheduleReposition);
 
   // ---- boot -----------------------------------------------------------------
   fetch(JSON_URL)
