@@ -368,6 +368,10 @@
   // Delegated hover: map whatever is under the cursor to its token via closest().
   // Robust to child text (e.g. span inside .audio-name), overflowing glyphs, and
   // elements rendered after the initial scan (lazy audio demos).
+  // Driven by mousemove, not mouseover: the audio card's stretched-link::after
+  // spans the whole card, so a single mouseover fires on entry and none again as
+  // you slide down onto the track name underneath. mousemove fires on every move,
+  // and the activeD-equality check below keeps it cheap.
   function onOver(e) {
     // Resolve the token element under the cursor with elementsFromPoint so we can
     // see THROUGH overlay elements (e.g. the audio player's stretched-link::after,
@@ -399,9 +403,20 @@
         var node = nodes[i];
         if (seen.indexOf(node) !== -1) continue;     // first (composite) match wins
         if (node.closest("#sfa-type-tweak")) continue; // skip our own UI
-        if (!node.textContent || !node.textContent.trim()) continue; // skip empty cells (no visible text)
+        if (!node.textContent || !node.textContent.trim()) continue; // skip empty cells (no text)
         var cs = getComputedStyle(node);
         if (cs.visibility === "hidden" || cs.display === "none" || parseFloat(cs.opacity) === 0) continue; // skip invisible (e.g. hidden carousel cards)
+        // Skip elements that render no visible glyphs: e.g. wrappers whose text lives
+        // only in display:none descendants (textContent includes those, so the checks
+        // above pass, but nothing is actually painted -> phantom empty box).
+        var renders = false;
+        try {
+          var rng = document.createRange();
+          rng.selectNodeContents(node);
+          var rcs = rng.getClientRects();
+          for (var k = 0; k < rcs.length; k++) { if (rcs[k].width > 0.5 && rcs[k].height > 0.5) { renders = true; break; } }
+        } catch (e) { renders = true; }
+        if (!renders) continue;
         seen.push(node);
         detected.push({ el: node, t: t });
       }
